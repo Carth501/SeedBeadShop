@@ -25,6 +25,13 @@ function App() {
 			description: 'Description of product 3',
 			inStock: true,
 		},
+		{
+			image: '/path/to/image3.jpg',
+			price: '$30.00',
+			label: 'Product 3',
+			description: 'Description of product 3',
+			inStock: true,
+		},
 	];
 
 	return (

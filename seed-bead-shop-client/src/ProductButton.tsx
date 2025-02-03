@@ -8,7 +8,7 @@ interface ProductButtonProps {
 const ProductButton: React.FC<ProductButtonProps> = ({ label, onClick }) => {
 	return (
 		<button
-			className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-800 transition-colors duration-250 hover:border-gray-500"
+			className="rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-blue-200 transition-colors duration-250 hover:border-blue-500"
 			onClick={onClick}
 		>
 			{label}

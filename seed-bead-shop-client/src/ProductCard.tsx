@@ -11,7 +11,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ image, price, label, description, inStock }) => {
 	return (
-		<div className="border border-gray-300 rounded-lg p-4 w-[200px] shadow-md flex flex-col items-stretch">
+		<div className="border border-gray-300 rounded-lg p-4 w-[200px] shadow-md flex flex-col items-stretch shrink-0">
 			<img
 				src={image}
 				alt={label}

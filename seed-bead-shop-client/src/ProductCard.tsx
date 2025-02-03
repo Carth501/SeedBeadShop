@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductButton from './ProductButton';
 
 interface ProductCardProps {
 	image: string;
@@ -20,12 +21,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, price, label, descript
 			<p className="text-left m-0">{description}</p>
 			<p className="text-left m-0">{price}</p>
 			<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
-			<button className="mt-2 px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer">
-				One-Click Buy
-			</button>
-			<button className="mt-2 px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer">
-				Add to Cart
-			</button>
+			<ProductButton label="One-Click Buy" onClick={() => console.log('One-Click Buy')} />
+			<ProductButton label="Add to Cart" onClick={() => console.log('Add to Cart')} />
 		</div>
 	);
 };

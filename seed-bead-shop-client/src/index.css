@@ -1,25 +1,32 @@
 @import 'tailwindcss';
 
 :root {
-	@apply font-sans leading-relaxed font-normal text-white bg-gray-900;
+	font-family: var(--font-sans);
+	--tw-leading: var(--leading-relaxed);
+	line-height: var(--leading-relaxed);
+	--tw-font-weight: var(--font-weight-normal);
+	font-weight: var(--font-weight-normal);
+	color: var(--color-white);
+	background-color: var(--color-gray-900);
   color: rgba(255, 255, 255, 0.87);
 }
 
 h1 {
-  @apply text-4xl leading-tight;
+	font-size: var(--text-4xl);
+	line-height: var(--tw-leading, var(--text-4xl--line-height));
+	--tw-leading: var(--leading-tight);
+	line-height: var(--leading-tight);
 }
 
 a {
-  @apply font-medium;
+	--tw-font-weight: var(--font-weight-medium);
+	font-weight: var(--font-weight-medium);
   color: #646cff;
 }
 a:hover {
   color: #535bf2;
 }
 
-button {
-  @apply rounded-lg border border-transparent px-4 py-2 text-base font-medium bg-gray-800 transition-colors duration-250;
-}
 button:hover {
   border-color: #646cff;
 }

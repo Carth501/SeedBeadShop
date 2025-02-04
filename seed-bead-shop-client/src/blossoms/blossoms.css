@@ -64,7 +64,7 @@
 #leaves i:nth-of-type(2n)  { animation-delay: 4.9s;}
 #leaves i:nth-of-type(3n)  { animation-delay: 5.3s;}
 #leaves i:nth-of-type(4n)  { animation-delay: 6.4s;}
-#leaves i:nth-of-type(5n)  { animation-delay: 9s;  }
+#leaves i:nth-of-type(5n)  { animation-delay: 0.5s;  }
 #leaves i:nth-of-type(6n)  { animation-delay: 4.5s;}
 #leaves i:nth-of-type(7n)  { animation-delay: 3.8s;}
 #leaves i:nth-of-type(8n)  { animation-delay: 1.5s;}

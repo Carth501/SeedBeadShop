@@ -37,10 +37,7 @@ function App() {
 
 	return (
 		<>
-			<Header />
-			<div className="absolute top-0 left-0 w-full h-screen z-0">
-				<Blossoms />
-			</div>
+			<Header className="background" />
 			<div className="product-row flex overflow-x-auto p-4 gap-4 w-screen">
 				{products.map((product, index) => (
 					<ProductCard
@@ -52,6 +49,9 @@ function App() {
 						inStock={product.inStock}
 					/>
 				))}
+			</div>
+			<div className="absolute top-0 left-0 w-full h-screen -z-1">
+				<Blossoms />
 			</div>
 		</>
 	);

@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-:root {
+:root, .background {
 	font-family: var(--font-sans);
 	--tw-leading: var(--leading-relaxed);
 	line-height: var(--leading-relaxed);

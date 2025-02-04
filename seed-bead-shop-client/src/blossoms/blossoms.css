@@ -12,11 +12,11 @@
     box-shadow: inset 0px 0px 1px #222;
     border: 0px solid #333;
     z-index: 1;
-    -webkit-animation: falling 5s 0s infinite;
+    -webkit-animation: falling 10s 0s infinite;
 }
 
-#leaves i:nth-of-type(2n) { -webkit-animation: falling2 5s 0s infinite; }
-#leaves i:nth-of-type(3n) { -webkit-animation: falling3 5s 0s infinite; }
+#leaves i:nth-of-type(2n) { -webkit-animation: falling2 10s 0s infinite; }
+#leaves i:nth-of-type(3n) { -webkit-animation: falling3 10s 0s infinite; }
 
 #leaves i:before {
   position: absolute;
@@ -61,12 +61,12 @@
 #leaves i:nth-of-type(3n+2):after  { height:10px; width:2px; top:1px; left:8px; }
 
 #leaves i:nth-of-type(n)   { -webkit-animation-delay: 1.9s;}
-#leaves i:nth-of-type(2n)  { -webkit-animation-delay: 3.9s;}
-#leaves i:nth-of-type(3n)  { -webkit-animation-delay: 2.3s;}
-#leaves i:nth-of-type(4n)  { -webkit-animation-delay: 4.4s;}
-#leaves i:nth-of-type(5n)  { -webkit-animation-delay: 5s;  }
-#leaves i:nth-of-type(6n)  { -webkit-animation-delay: 3.5s;}
-#leaves i:nth-of-type(7n)  { -webkit-animation-delay: 2.8s;}
+#leaves i:nth-of-type(2n)  { -webkit-animation-delay: 4.9s;}
+#leaves i:nth-of-type(3n)  { -webkit-animation-delay: 5.3s;}
+#leaves i:nth-of-type(4n)  { -webkit-animation-delay: 6.4s;}
+#leaves i:nth-of-type(5n)  { -webkit-animation-delay: 9s;  }
+#leaves i:nth-of-type(6n)  { -webkit-animation-delay: 4.5s;}
+#leaves i:nth-of-type(7n)  { -webkit-animation-delay: 3.8s;}
 #leaves i:nth-of-type(8n)  { -webkit-animation-delay: 1.5s;}
 #leaves i:nth-of-type(9n)  { -webkit-animation-delay: 3.3s;}
 #leaves i:nth-of-type(10n) { -webkit-animation-delay: 2.5s;}

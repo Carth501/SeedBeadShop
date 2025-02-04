@@ -1,6 +1,7 @@
 import './App.css';
 import Header from './Header';
 import ProductCard from './ProductCard';
+import Blossoms from './blossoms/blossoms';
 
 function App() {
 	const products = [
@@ -36,7 +37,7 @@ function App() {
 
 	return (
 		<>
-			<Header />
+			<Header className="background" />
 			<div className="product-row flex overflow-x-auto p-4 gap-4 w-screen">
 				{products.map((product, index) => (
 					<ProductCard
@@ -48,6 +49,9 @@ function App() {
 						inStock={product.inStock}
 					/>
 				))}
+			</div>
+			<div className="absolute top-0 left-0 w-full h-screen -z-1">
+				<Blossoms />
 			</div>
 		</>
 	);

@@ -1,14 +1,14 @@
 @import 'tailwindcss';
 
-:root {
+:root, .background {
 	font-family: var(--font-sans);
 	--tw-leading: var(--leading-relaxed);
 	line-height: var(--leading-relaxed);
 	--tw-font-weight: var(--font-weight-normal);
 	font-weight: var(--font-weight-normal);
 	color: var(--color-white);
-	background-color: var(--color-gray-900);
-  color: rgba(255, 255, 255, 0.87);
+	background-color: var(--color-pink-50);
+  color: rgba(0, 0, 0, 0.87);
 }
 
 h1 {
@@ -37,7 +37,7 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #86b0d5;
     background-color: #ffffff;
   }
   a:hover {

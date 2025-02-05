@@ -5,3 +5,4 @@ node_modules
 .prettierrc
 .prettierignore
 eslint.config.mjs
+*.png

@@ -1,44 +1,41 @@
 import './App.css';
 import Header from './Header';
 import ProductCard from './ProductCard';
+import earrings_1 from './assets/earrings_1.png';
+import earrings_2 from './assets/earrings_2.png';
+import earrings_3 from './assets/earrings_3.png';
 import Blossoms from './blossoms/blossoms';
 
 function App() {
 	const products = [
 		{
-			image: '/path/to/image1.jpg',
+			image: earrings_1,
 			price: '$10.00',
 			label: 'Product 1',
 			description: 'Description of product 1',
-			inStock: true,
+			inStock: false,
 		},
 		{
-			image: '/path/to/image2.jpg',
+			image: earrings_2,
 			price: '$20.00',
 			label: 'Product 2',
 			description: 'Description of product 2',
 			inStock: false,
 		},
+
 		{
-			image: '/path/to/image3.jpg',
+			image: earrings_3,
 			price: '$30.00',
 			label: 'Product 3',
 			description: 'Description of product 3',
-			inStock: true,
-		},
-		{
-			image: '/path/to/image3.jpg',
-			price: '$30.00',
-			label: 'Product 3',
-			description: 'Description of product 3',
-			inStock: true,
+			inStock: false,
 		},
 	];
 
 	return (
 		<>
 			<Header />
-			<div className="product-row flex overflow-x-auto p-4 gap-4 w-screen">
+			<div className="product-row flex overflow-x-auto overflow-y-visible p-4 gap-4 w-screen">
 				{products.map((product, index) => (
 					<ProductCard
 						key={index}

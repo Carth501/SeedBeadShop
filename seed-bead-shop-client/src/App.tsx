@@ -47,7 +47,7 @@ function App() {
 					/>
 				))}
 			</div>
-			<div className="absolute top-0 left-0 w-full h-screen -z-1">
+			<div className="absolute top-0 left-0 w-[95%] h-screen -z-1">
 				<Blossoms />
 			</div>
 		</>

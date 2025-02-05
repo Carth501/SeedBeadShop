@@ -38,7 +38,8 @@
 
 .product-row {
   display: flex;
-  overflow-x: scroll;
+	justify-content: center;
+  overflow: visible;
   padding: 16px;
   gap: 16px;
 }

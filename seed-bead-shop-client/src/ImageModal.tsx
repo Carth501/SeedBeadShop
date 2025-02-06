@@ -46,8 +46,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 					<>
 						<button
 							onClick={handlePrevious}
-							className="modal-button absolute top-1/2 bg-gray-300/70 
-							border-none p-2 cursor-pointer rounded-full shadow-sm"
+							className="origin-center absolute top-1/2 bg-gray-300/70 
+							border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 						</button>
 						<button
 							onClick={handleNext}
-							className="modal-button absolute top-1/2 bg-gray-300/70 
-							border-none p-2 cursor-pointer rounded-full shadow-sm"
+							className="origin-center absolute top-1/2 bg-gray-300/70 
+							border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -82,11 +82,13 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 						</button>
 					</>
 				)}
-				<div className="dots-container">
+				<div className="flex justify-center mt-4">
 					{images.map((_, index) => (
 						<span
 							key={index}
-							className={`dot ${index === currentIndex ? 'active' : ''}`}
+							className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block transition ease-in-out duration-300 ${
+								index === currentIndex ? 'bg-pink-300' : ''
+							}`}
 						></span>
 					))}
 				</div>

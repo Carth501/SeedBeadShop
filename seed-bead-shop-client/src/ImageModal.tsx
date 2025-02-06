@@ -26,12 +26,29 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 	};
 
 	return (
-		<div className="modal-overlay" onClick={handleClose}>
-			<div className="modal-content" onClick={(e) => e.stopPropagation()}>
-				<img src={images[currentIndex]} alt="Product" className="modal-image" />
+		<div
+			className="fixed top-0 left-0 w-full h-full bg-black/70
+			 flex justify-center items-center z-1000"
+			onClick={handleClose}
+		>
+			<div
+				className="bg-pink-100 rounded-lg p-5 shadow-lg max-w-full
+				max-h-full overflow-auto"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<img
+					src={images[currentIndex]}
+					alt="Product"
+					className="w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-lg"
+				/>
+
 				{images.length > 1 && (
 					<>
-						<button onClick={handlePrevious} className="modal-button">
+						<button
+							onClick={handlePrevious}
+							className="modal-button absolute top-1/2 bg-gray-300/70 
+							border-none p-2 cursor-pointer rounded-full shadow-sm"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"
@@ -45,7 +62,11 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 								/>
 							</svg>
 						</button>
-						<button onClick={handleNext} className="modal-button">
+						<button
+							onClick={handleNext}
+							className="modal-button absolute top-1/2 bg-gray-300/70 
+							border-none p-2 cursor-pointer rounded-full shadow-sm"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 24 24"

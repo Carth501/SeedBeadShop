@@ -88,6 +88,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 							className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block transition ease-in-out duration-300 ${
 								index === currentIndex ? 'bg-pink-300' : ''
 							}`}
+							onClick={() => setCurrentIndex(index)}
 						></span>
 					))}
 				</div>

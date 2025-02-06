@@ -20,8 +20,13 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 		setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 	};
 
+	const handleClose = () => {
+		onClose();
+		setCurrentIndex(0);
+	};
+
 	return (
-		<div className="modal-overlay" onClick={onClose}>
+		<div className="modal-overlay" onClick={handleClose}>
 			<div className="modal-content" onClick={(e) => e.stopPropagation()}>
 				<img src={images[currentIndex]} alt="Product" className="modal-image" />
 				<button onClick={handlePrevious} className="modal-button">

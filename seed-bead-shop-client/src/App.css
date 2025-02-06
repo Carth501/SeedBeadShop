@@ -36,14 +36,6 @@
   color: #888;
 }
 
-.product-row {
-  display: flex;
-	justify-content: center;
-  overflow: visible;
-  padding: 16px;
-  gap: 16px;
-}
-
 .product-row::-webkit-scrollbar {
   height: 8px;
 }

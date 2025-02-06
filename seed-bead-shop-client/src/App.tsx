@@ -52,7 +52,10 @@ function App() {
 	return (
 		<>
 			<Header />
-			<div className="product-row flex overflow-x-auto overflow-y-visible p-4 gap-4 w-screen">
+			<div
+				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
+			p-4 gap-4 w-screen"
+			>
 				{products.map((product, index) => (
 					<ProductCard
 						key={index}

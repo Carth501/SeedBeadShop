@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import './App.css';
 import Header from './Header';
+import ImageModal from './ImageModal';
 import ProductCard from './ProductCard';
 import earrings_1 from './assets/earrings_1.png';
 import earrings_2 from './assets/earrings_2.png';
@@ -7,6 +9,9 @@ import earrings_3 from './assets/earrings_3.png';
 import Blossoms from './blossoms/blossoms';
 
 function App() {
+	const [isModalOpen, setModalOpen] = useState(false);
+	const [currentImage, setCurrentImage] = useState('');
+
 	const products = [
 		{
 			image: earrings_1,
@@ -32,6 +37,15 @@ function App() {
 		},
 	];
 
+	const handleImageClick = (image: string) => {
+		setCurrentImage(image);
+		setModalOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setModalOpen(false);
+	};
+
 	return (
 		<>
 			<Header />
@@ -44,12 +58,14 @@ function App() {
 						label={product.label}
 						description={product.description}
 						inStock={product.inStock}
+						onImageClick={handleImageClick}
 					/>
 				))}
 			</div>
 			<div className="absolute top-0 left-0 w-[95%] h-screen -z-1">
 				<Blossoms />
 			</div>
+			<ImageModal image={currentImage} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</>
 	);
 }

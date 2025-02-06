@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
 
 interface ProductCardProps {
@@ -7,19 +8,34 @@ interface ProductCardProps {
 	label: string;
 	description: string;
 	inStock: boolean;
+	onImageClick: (image: string) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ image, price, label, description, inStock }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+	image,
+	price,
+	label,
+	description,
+	inStock,
+	onImageClick,
+}) => {
+	const [isModalOpen, setModalOpen] = useState(false);
+
+	const handleCloseModal = () => {
+		setModalOpen(false);
+	};
+
 	return (
 		<div
-			className="product-card border border-gray-300 rounded-lg p-4 w-[200px] 
-		shadow-md flex flex-col items-stretch shrink-0 background"
+			className={`product-card border border-gray-300 rounded-lg p-4 w-[200px] 
+			shadow-md flex flex-col items-stretch shrink-0 background ${!isModalOpen ? 'hover' : ''}`}
 		>
 			<img
 				src={image}
 				alt={label}
-				className="w-full h-auto aspect-square object-cover rounded hover:scale-200 
+				className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
 				transition-transform duration-300"
+				onClick={() => onImageClick(image)}
 			/>
 			<h2 className="text-left m-0">{label}</h2>
 			<p className="text-left m-0">{description}</p>
@@ -27,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, price, label, descript
 			<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
 			<ProductButton label="One-Click Buy" onClick={() => console.log('One-Click Buy')} />
 			<ProductButton label="Add to Cart" onClick={() => console.log('Add to Cart')} />
+			<ImageModal image={image} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>
 	);
 };

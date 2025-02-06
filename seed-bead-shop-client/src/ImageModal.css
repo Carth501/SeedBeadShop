@@ -27,5 +27,24 @@
     max-width: 95vw;
     max-height: 95vh;
     border-radius: 8px;
+}
 
+.modal-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-button:first-of-type {
+    left: 10px;
+}
+
+.modal-button:last-of-type {
+    right: 10px;
 } 

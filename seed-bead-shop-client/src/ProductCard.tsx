@@ -3,16 +3,18 @@ import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
 
 interface ProductCardProps {
-	image: string;
+	id: number;
+	images: string[];
 	price: string;
 	label: string;
 	description: string;
 	inStock: boolean;
-	onImageClick: (image: string) => void;
+	onImageClick: (id: number) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
-	image,
+	id,
+	images,
 	price,
 	label,
 	description,
@@ -31,11 +33,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			shadow-md flex flex-col items-stretch shrink-0 background ${!isModalOpen ? 'hover' : ''}`}
 		>
 			<img
-				src={image}
+				src={images[0]}
 				alt={label}
 				className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
 				transition-transform duration-300"
-				onClick={() => onImageClick(image)}
+				onClick={() => onImageClick(id)}
 			/>
 			<h2 className="text-left m-0">{label}</h2>
 			<p className="text-left m-0">{description}</p>
@@ -43,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
 			<ProductButton label="One-Click Buy" onClick={() => console.log('One-Click Buy')} />
 			<ProductButton label="Add to Cart" onClick={() => console.log('Add to Cart')} />
-			<ImageModal image={image} isOpen={isModalOpen} onClose={handleCloseModal} />
+			<ImageModal images={images} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>
 	);
 };

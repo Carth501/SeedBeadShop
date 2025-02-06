@@ -6,22 +6,25 @@ import ProductCard from './ProductCard';
 import earrings_1 from './assets/earrings_1.png';
 import earrings_2 from './assets/earrings_2.png';
 import earrings_3 from './assets/earrings_3.png';
+import earrings_3_1 from './assets/earrings_3_1.jpg';
+import earrings_3_2 from './assets/earrings_3_2.jpg';
+import earrings_3_3 from './assets/earrings_3_3.jpg';
 import Blossoms from './blossoms/blossoms';
 
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
-	const [currentImage, setCurrentImage] = useState('');
+	const [currentImages, setCurrentImages] = useState<string[]>([]);
 
 	const products = [
 		{
-			image: earrings_1,
+			images: [earrings_1],
 			price: '$10.00',
 			label: 'Product 1',
 			description: 'Description of product 1',
 			inStock: false,
 		},
 		{
-			image: earrings_2,
+			images: [earrings_2],
 			price: '$20.00',
 			label: 'Product 2',
 			description: 'Description of product 2',
@@ -29,7 +32,7 @@ function App() {
 		},
 
 		{
-			image: earrings_3,
+			images: [earrings_3, earrings_3_1, earrings_3_2, earrings_3_3],
 			price: '$30.00',
 			label: 'Product 3',
 			description: 'Description of product 3',
@@ -37,8 +40,8 @@ function App() {
 		},
 	];
 
-	const handleImageClick = (image: string) => {
-		setCurrentImage(image);
+	const handleImageClick = (id: number) => {
+		setCurrentImages(products[id].images);
 		setModalOpen(true);
 	};
 
@@ -53,11 +56,12 @@ function App() {
 				{products.map((product, index) => (
 					<ProductCard
 						key={index}
-						image={product.image}
+						id={index}
 						price={product.price}
 						label={product.label}
 						description={product.description}
 						inStock={product.inStock}
+						images={product.images}
 						onImageClick={handleImageClick}
 					/>
 				))}
@@ -65,7 +69,7 @@ function App() {
 			<div className="absolute top-0 left-0 w-[95%] h-screen -z-1">
 				<Blossoms />
 			</div>
-			<ImageModal image={currentImage} isOpen={isModalOpen} onClose={handleCloseModal} />
+			<ImageModal images={currentImages} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</>
 	);
 }

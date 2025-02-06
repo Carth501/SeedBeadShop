@@ -6,3 +6,9 @@ node_modules
 .prettierignore
 eslint.config.mjs
 *.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.ico

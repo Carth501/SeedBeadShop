@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ImageModal.css';
 
 interface ImageModalProps {
 	images: string[];

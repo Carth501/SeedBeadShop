@@ -61,6 +61,14 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 						</button>
 					</>
 				)}
+				<div className="dots-container">
+					{images.map((_, index) => (
+						<span
+							key={index}
+							className={`dot ${index === currentIndex ? 'active' : ''}`}
+						></span>
+					))}
+				</div>
 			</div>
 		</div>
 	);

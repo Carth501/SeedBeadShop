@@ -54,7 +54,7 @@ function App() {
 			<Header />
 			<div
 				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
-			p-4 gap-4 w-screen"
+			read-the-docsp-4 gap-4 w-screen p-4"
 			>
 				{products.map((product, index) => (
 					<ProductCard

@@ -29,8 +29,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
 	return (
 		<div
-			className={`product-card border border-gray-300 rounded-lg p-4 w-[200px] 
-			shadow-md flex flex-col items-stretch shrink-0 background ${!isModalOpen ? 'hover' : ''}`}
+			className={`border border-gray-300 rounded-lg p-4 w-[200px] transition-all duration-300
+			shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
+			${!isModalOpen ? 'hover' : ''}`}
 		>
 			<img
 				src={images[0]}

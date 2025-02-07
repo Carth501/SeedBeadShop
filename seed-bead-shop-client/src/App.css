@@ -8,3 +8,9 @@
 	display: flex;
   white-space: nowrap;
 }
+
+.image-gallery-display {
+  mask-image: linear-gradient(black, transparent);
+}
+
+

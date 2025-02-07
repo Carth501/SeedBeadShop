@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './Header';
-import ImageModal from './ImageModal';
-import ProductCard from './ProductCard';
 import earrings_1 from './assets/earrings_1.png';
 import earrings_2 from './assets/earrings_2.png';
 import earrings_3 from './assets/earrings_3.png';
@@ -10,6 +7,10 @@ import earrings_3_1 from './assets/earrings_3_1.jpg';
 import earrings_3_2 from './assets/earrings_3_2.jpg';
 import earrings_3_3 from './assets/earrings_3_3.jpg';
 import Blossoms from './blossoms/blossoms';
+import Header from './Header';
+import ImageGallery from './ImageGallery';
+import ImageModal from './ImageModal';
+import ProductCard from './ProductCard';
 
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
@@ -52,6 +53,7 @@ function App() {
 	return (
 		<>
 			<Header />
+			<ImageGallery images={products[2].images} />
 			<div
 				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
 			read-the-docsp-4 gap-4 w-screen p-4"

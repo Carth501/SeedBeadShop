@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 interface ImageGalleryProps {
 	images: string[];
-	interval?: number; // Interval in milliseconds
+	interval?: number;
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 6000 }) => {

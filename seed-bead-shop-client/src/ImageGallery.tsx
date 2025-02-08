@@ -5,15 +5,24 @@ interface ImageGalleryProps {
 	interval?: number; // Interval in milliseconds
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 3000 }) => {
+const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 6000 }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const [opacity, setOpacity] = useState(0);
 
 	useEffect(() => {
+		console.log('rendering');
+
 		const cycleImages = setInterval(() => {
-			setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+			setOpacity(() => 0);
+			setTimeout(() => {
+				setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+				setOpacity(() => 1);
+			}, 500);
 		}, interval);
 
-		return () => clearInterval(cycleImages);
+		return () => {
+			clearInterval(cycleImages);
+		};
 	}, [images.length, interval]);
 
 	return (
@@ -21,7 +30,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 3000 }) 
 			<img
 				src={images[currentIndex]}
 				alt="Gallery"
-				className="image-gallery-display w-full h-60 object-cover rounded overflow-hidden"
+				className="image-gallery-display w-full h-60 object-cover rounded
+				overflow-hidden transition-opacity duration-500 ease-in-out"
+				style={{ opacity }}
 			/>
 			<div className="flex justify-center mt-4">
 				{images.map((_, index) => (

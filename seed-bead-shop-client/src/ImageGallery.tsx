@@ -3,9 +3,14 @@ import React, { useEffect, useState } from 'react';
 interface ImageGalleryProps {
 	images: string[];
 	interval?: number;
+	fade_duration?: number;
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 6000 }) => {
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+	images,
+	interval = 6000,
+	fade_duration = 600,
+}) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [opacity, setOpacity] = useState(0);
 
@@ -17,13 +22,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 6000 }) 
 			setTimeout(() => {
 				setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
 				setOpacity(() => 1);
-			}, 500);
+			}, fade_duration);
 		}, interval);
 
 		return () => {
 			clearInterval(cycleImages);
 		};
-	}, [images.length, interval]);
+	}, [images.length, interval, fade_duration]);
 
 	return (
 		<div className="image-gallery fixed top-22 left-0 w-full h-full -z-10">
@@ -38,9 +43,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, interval = 6000 }) 
 				{images.map((_, index) => (
 					<span
 						key={index}
-						className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block transition ease-in-out duration-300 ${
-							index === currentIndex ? 'bg-pink-300' : ''
-						}`}
+						className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block 
+							transition ease-in-out duration-${fade_duration} ${index === currentIndex ? 'bg-pink-300' : ''}`}
 					></span>
 				))}
 			</div>

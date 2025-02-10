@@ -26,20 +26,13 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 		loadImages();
 	}, [isOpen, images]);
 
-	if (!isOpen) return null;
-
-	const handleNext = () => {
-		setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length);
-	};
-
-	const handlePrevious = () => {
-		setCurrentIndex((prevIndex) => (prevIndex - 1 + imageSrcs.length) % imageSrcs.length);
-	};
-
 	const handleClose = () => {
 		onClose();
+		setImageSrcs([]);
 		setCurrentIndex(0);
 	};
+
+	if (!isOpen) return null;
 
 	return (
 		<div
@@ -52,16 +45,25 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 				max-h-full overflow-auto"
 				onClick={(e) => e.stopPropagation()}
 			>
-				<img
-					src={imageSrcs[currentIndex]}
-					alt="Product"
-					className="w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-lg"
-				/>
+				{imageSrcs.length > 0 ? (
+					<img
+						src={imageSrcs[currentIndex]}
+						alt="Product"
+						className="w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-lg"
+					/>
+				) : (
+					<div className="loader">Loading...</div>
+				)}
 
 				{imageSrcs.length > 1 && (
 					<>
 						<button
-							onClick={handlePrevious}
+							onClick={() =>
+								setCurrentIndex(
+									(prevIndex) =>
+										(prevIndex - 1 + imageSrcs.length) % imageSrcs.length,
+								)
+							}
 							className="origin-center absolute top-1/2 bg-gray-300/70 
 							border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
 						>
@@ -79,7 +81,9 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 							</svg>
 						</button>
 						<button
-							onClick={handleNext}
+							onClick={() =>
+								setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length)
+							}
 							className="origin-center absolute top-1/2 bg-gray-300/70 
 							border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
 						>

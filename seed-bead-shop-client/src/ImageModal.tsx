@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchImage } from './services/apiService';
 
 interface ImageModalProps {
 	images: string[];
@@ -7,16 +8,32 @@ interface ImageModalProps {
 }
 
 const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
+	const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
+
+	useEffect(() => {
+		const loadImages = async () => {
+			if (isOpen && images.length > 0) {
+				try {
+					const imageUrls = await Promise.all(images.map((image) => fetchImage(image)));
+					setImageSrcs(imageUrls);
+				} catch (error) {
+					console.error('Error fetching images:', error);
+				}
+			}
+		};
+
+		loadImages();
+	}, [isOpen, images]);
 
 	if (!isOpen) return null;
 
 	const handleNext = () => {
-		setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+		setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length);
 	};
 
 	const handlePrevious = () => {
-		setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+		setCurrentIndex((prevIndex) => (prevIndex - 1 + imageSrcs.length) % imageSrcs.length);
 	};
 
 	const handleClose = () => {
@@ -36,12 +53,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 				onClick={(e) => e.stopPropagation()}
 			>
 				<img
-					src={images[currentIndex]}
+					src={imageSrcs[currentIndex]}
 					alt="Product"
 					className="w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-lg"
 				/>
 
-				{images.length > 1 && (
+				{imageSrcs.length > 1 && (
 					<>
 						<button
 							onClick={handlePrevious}
@@ -82,7 +99,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 					</>
 				)}
 				<div className="flex justify-center mt-4">
-					{images.map((_, index) => (
+					{imageSrcs.map((_, index) => (
 						<span
 							key={index}
 							className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block transition ease-in-out duration-300 ${

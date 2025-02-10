@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
+import { fetchImage } from './services/apiService';
 
 interface ProductCardProps {
 	id: number;
-	images: string[];
 	price: string;
 	label: string;
 	description: string;
 	inStock: boolean;
+	images: string[];
 	onImageClick: (id: number) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
 	id,
-	images,
 	price,
 	label,
 	description,
 	inStock,
+	images,
 	onImageClick,
 }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
+	const [imageSrc, setImageSrc] = useState<string | null>(null);
+
+	useEffect(() => {
+		const loadImage = async () => {
+			if (images.length > 0) {
+				try {
+					const imageUrl = await fetchImage(images[0]);
+					setImageSrc(imageUrl);
+				} catch (error) {
+					console.error('Error fetching image:', error);
+				}
+			}
+		};
+
+		loadImage();
+	}, [images]);
 
 	const handleCloseModal = () => {
 		setModalOpen(false);
@@ -33,13 +50,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
 			${!isModalOpen ? 'hover' : ''}`}
 		>
-			<img
-				src={images[0]}
-				alt={label}
-				className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
-				transition-transform duration-300"
-				onClick={() => onImageClick(id)}
-			/>
+			{imageSrc && (
+				<img
+					src={imageSrc}
+					alt={label}
+					className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
+					transition-transform duration-300"
+					onClick={() => onImageClick(id)}
+				/>
+			)}
 			<h2 className="text-left m-0">{label}</h2>
 			<p className="text-left m-0">{description}</p>
 			<p className="text-left m-0">{price}</p>

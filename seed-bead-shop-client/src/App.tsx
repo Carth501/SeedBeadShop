@@ -1,56 +1,32 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
-import earrings_1 from './assets/earrings_1.png';
-import earrings_2 from './assets/earrings_2.png';
-import earrings_3 from './assets/earrings_3.png';
-import earrings_3_1 from './assets/earrings_3_1.jpg';
-import earrings_3_2 from './assets/earrings_3_2.jpg';
-import earrings_3_3 from './assets/earrings_3_3.jpg';
 import Blossoms from './blossoms/blossoms';
 import Header from './Header';
-import ImageGallery from './ImageGallery';
 import ImageModal from './ImageModal';
 import ProductCard from './ProductCard';
+
+interface Product {
+	images: string[];
+	price: string;
+	label: string;
+	description: string;
+	inStock: boolean;
+}
 
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [currentImages, setCurrentImages] = useState<string[]>([]);
-
-	const products = [
-		{
-			images: [earrings_1],
-			price: '$10.00',
-			label: 'Product 1',
-			description: 'Description of product 1',
-			inStock: false,
-		},
-		{
-			images: [earrings_2],
-			price: '$20.00',
-			label: 'Product 2',
-			description: 'Description of product 2',
-			inStock: false,
-		},
-
-		{
-			images: [earrings_3, earrings_3_1, earrings_3_2, earrings_3_3],
-			price: '$30.00',
-			label: 'Product 3',
-			description: 'Description of product 3',
-			inStock: false,
-		},
-	];
+	const [products, setProducts] = useState<Product[]>([]);
 
 	useEffect(() => {
 		axios
-			.get('http://127.0.0.1:5000/api/hello')
+			.get('http://127.0.0.1:5000/api/products')
 			.then((response) => {
-				console.log(response.data);
-				// Handle the data as needed
+				setProducts(response.data);
 			})
 			.catch((error) => {
-				console.error('Error fetching data:', error);
+				console.error('Error fetching products:', error);
 			});
 	}, []);
 
@@ -66,7 +42,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			<ImageGallery images={products[2].images} />
+			{/* <ImageGallery images={products[2].images} /> */}
 			<div
 				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
 			read-the-docsp-4 gap-4 w-screen p-4"

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { fetchImage } from './services/apiService';
 
 interface ImageGalleryProps {
 	images: string[];
@@ -13,6 +14,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [opacity, setOpacity] = useState(0);
+	const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 
 	useEffect(() => {
 		console.log('rendering');
@@ -30,15 +32,32 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 		};
 	}, [images.length, interval, fade_duration]);
 
+	useEffect(() => {
+		const loadImages = async () => {
+			if (images.length > 0) {
+				try {
+					const imageUrls = await Promise.all(images.map((image) => fetchImage(image)));
+					setImageSrcs(imageUrls);
+				} catch (error) {
+					console.error('Error fetching images:', error);
+				}
+			}
+		};
+
+		loadImages();
+	}, [images]);
+
 	return (
 		<div className="image-gallery fixed top-22 left-0 w-full h-full -z-10">
-			<img
-				src={images[currentIndex]}
-				alt="Gallery"
-				className="image-gallery-display w-full h-60 object-cover rounded
-				overflow-hidden transition-opacity duration-500 ease-in-out"
-				style={{ opacity }}
-			/>
+			{imageSrcs.length > 0 && (
+				<img
+					src={imageSrcs[currentIndex]}
+					alt="Gallery"
+					className="image-gallery-display w-full h-60 object-cover rounded
+					overflow-hidden transition-opacity duration-500 ease-in-out"
+					style={{ opacity }}
+				/>
+			)}
 			<div className="flex justify-center mt-4">
 				{images.map((_, index) => (
 					<span

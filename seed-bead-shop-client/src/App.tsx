@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './App.css';
 import earrings_1 from './assets/earrings_1.png';
 import earrings_2 from './assets/earrings_2.png';
@@ -40,6 +41,18 @@ function App() {
 			inStock: false,
 		},
 	];
+
+	useEffect(() => {
+		axios
+			.get('http://127.0.0.1:5000/api/hello')
+			.then((response) => {
+				console.log(response.data);
+				// Handle the data as needed
+			})
+			.catch((error) => {
+				console.error('Error fetching data:', error);
+			});
+	}, []);
 
 	const handleImageClick = (id: number) => {
 		setCurrentImages(products[id].images);

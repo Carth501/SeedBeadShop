@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import Blossoms from './blossoms/blossoms';
 import Header from './Header';
+import ImageGallery from './ImageGallery';
 import ImageModal from './ImageModal';
 import ProductCard from './ProductCard';
+import { fetchProducts } from './services/apiService';
 
 interface Product {
 	images: string[];
@@ -20,14 +21,16 @@ function App() {
 	const [products, setProducts] = useState<Product[]>([]);
 
 	useEffect(() => {
-		axios
-			.get('http://127.0.0.1:5000/api/products')
-			.then((response) => {
-				setProducts(response.data);
-			})
-			.catch((error) => {
-				console.error('Error fetching products:', error);
-			});
+		const loadProducts = async () => {
+			try {
+				const productsData = await fetchProducts();
+				setProducts(productsData);
+			} catch (error) {
+				console.error('Error loading products:', error);
+			}
+		};
+
+		loadProducts();
 	}, []);
 
 	const handleImageClick = (id: number) => {
@@ -42,7 +45,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			{/* <ImageGallery images={products[2].images} /> */}
+			<ImageGallery images={products[2]?.images || []} />
 			<div
 				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
 			read-the-docsp-4 gap-4 w-screen p-4"

@@ -17,8 +17,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 	const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 
 	useEffect(() => {
-		console.log('rendering');
-
 		const cycleImages = setInterval(() => {
 			setOpacity(() => 0);
 			setTimeout(() => {

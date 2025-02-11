@@ -102,6 +102,15 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 						</button>
 					</>
 				)}
+				<button
+					className="origin-center absolute top-2 right-2 bg-gray-300/70 
+					border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
+					flex justify-center items-center"
+					onClick={onClose}
+					aria-label="Close modal"
+				>
+					X
+				</button>
 				<div className="flex justify-center mt-4">
 					{imageSrcs.map((_, index) => (
 						<span

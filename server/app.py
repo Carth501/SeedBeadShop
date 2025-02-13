@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+from sqlalchemy.orm import Session
 import os
+
+from models import Product, SessionLocal
 
 app = Flask(__name__)
 CORS(app)
@@ -9,42 +12,23 @@ CORS(app)
 def hello_world():
     return 'Hello, World!'
 
-# Define a GET endpoint for products
 @app.route('/api/products', methods=['GET'])
 def get_products():
-    products = [
+    session = SessionLocal()
+    products = session.query(Product).all()
+    session.close()
+    products_list = [
         {
-            'images': ['earrings_1.png'],
-            'price': '$10.00',
-            'label': 'Product 1',
-            'description': 'Description of product 1',
-            'inStock': False,
-        },
-        {
-            'images': ['earrings_2.png'],
-            'price': '$20.00',
-            'label': 'Product 2',
-            'description': 'Description of product 2',
-            'inStock': False,
-        },
-        {
-            'images': ['earrings_3.png', 'earrings_3_1.jpg', 'earrings_3_2.jpg', 'earrings_3_3.jpg'],
-            'price': '$30.00',
-            'label': 'Product 3',
-            'description': 'Description of product 3',
-            'inStock': False,
-        },
-        {
-            'images': ['earrings_3.png', 'earrings_3_1.jpg', 'earrings_3_2.jpg', 'earrings_3_3.jpg'],
-            'price': '$30.00',
-            'label': 'Product 4',
-            'description': 'What is the meaning?',
-            'inStock': False,
-        },
+            'images': product.images.split(','),
+            'price': product.price,
+            'label': product.label,
+            'description': product.description,
+            'inStock': product.inStock,
+        }
+        for product in products
     ]
-    return jsonify(products)
+    return jsonify(products_list)
 
-# Endpoint to serve images
 @app.route('/api/assets/<path:filename>', methods=['GET'])
 def get_image(filename):
     return send_from_directory(os.path.join(app.root_path, 'assets'), filename)

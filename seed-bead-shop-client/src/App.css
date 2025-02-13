@@ -33,7 +33,7 @@ html {
 	--gp: 50%/calc(var(--u) * 10) calc(var(--u) * 10);
 	height: 100vh;
 	background: 
-		
+	
 		repeating-linear-gradient(90deg, #00bcd430 , #3bffb638 calc(var(--u) * 5), #00bcd430 calc(var(--u) * 10)),
 	
 		radial-gradient(var(--c50) -36%, var(--p1)) var(--gp), 

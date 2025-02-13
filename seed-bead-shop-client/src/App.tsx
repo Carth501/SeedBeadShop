@@ -66,6 +66,7 @@ function App() {
 				<Blossoms />
 			</div>
 			<ImageModal images={currentImages} isOpen={isModalOpen} onClose={handleCloseModal} />
+			<div className="fixed inset-0 bg-white opacity-50 -z-1000"></div>
 		</>
 	);
 }

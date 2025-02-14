@@ -4,7 +4,7 @@ import ShowcasePanel from './ShowcasePanel';
 
 const ImagePanelCycle: React.FC = () => {
 	const [panels, setPanels] = useState<string[]>([]);
-	const [currentIndex, setCurrentIndex] = useState(0);
+	const [opacities, setOpacities] = useState<number[]>([]);
 
 	useEffect(() => {
 		console.log('Fetching showcase data...');
@@ -14,15 +14,28 @@ const ImagePanelCycle: React.FC = () => {
 				panelData.map((panel: { image: string }) => fetchImage(panel.image)),
 			);
 			setPanels(() => imageUrls);
+			setOpacities(() => {
+				const newOpacities = Array(panelData.length).fill(0);
+				newOpacities[0] = 1;
+				return newOpacities;
+			});
 		};
 
 		fetchData();
 	}, []);
 
 	useEffect(() => {
+		console.log('Starting panel cycle...');
 		const interval = setInterval(() => {
-			setCurrentIndex((prevIndex) => (prevIndex + 1) % panels.length);
-		}, 4000);
+			setOpacities((prevOpacities) => {
+				const newOpacities = [...prevOpacities];
+				const lastOpacity = newOpacities.pop();
+				if (lastOpacity !== undefined) {
+					newOpacities.unshift(lastOpacity);
+				}
+				return newOpacities;
+			});
+		}, 8000);
 
 		return () => clearInterval(interval);
 	}, [panels]);
@@ -31,7 +44,13 @@ const ImagePanelCycle: React.FC = () => {
 		return <div>Loading...</div>;
 	}
 
-	return <div>{panels.length > 0 && <ShowcasePanel imageUrl={panels[currentIndex]} />}</div>;
+	return (
+		<div className="relative w-full h-80 bg-black">
+			{panels.map((panel, index) => (
+				<ShowcasePanel key={index} imageUrl={panel} opacity={opacities[index]} />
+			))}
+		</div>
+	);
 };
 
 export default ImagePanelCycle;

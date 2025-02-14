@@ -17,7 +17,8 @@ const ProductButton: React.FC<ProductButtonProps> = ({ label, onClick }) => {
 			hover:scale-110 hover:border-rose-600
 			hover:shadow-rose-300 hover:shadow-lg
 			active:shadow-rose-400 active:shadow-xl
-			active:from-rose-200 active:to-rose-600"
+			active:from-rose-200 active:to-rose-600
+			hover:border-none"
 			onClick={onClick}
 		>
 			{label}

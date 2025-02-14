@@ -2,18 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { fetchImage, fetchShowcase } from '../services/apiService';
 import ShowcasePanel from './ShowcasePanel';
 
+interface PanelData {
+	image: string;
+	description: string;
+	label: string;
+	imageUrl?: string;
+}
+
 const ImagePanelCycle: React.FC = () => {
-	const [panels, setPanels] = useState<string[]>([]);
+	const [panels, setPanels] = useState<PanelData[]>([]);
 	const [opacities, setOpacities] = useState<number[]>([]);
 
 	useEffect(() => {
 		console.log('Fetching showcase data...');
 		const fetchData = async () => {
-			const panelData = await fetchShowcase();
-			const imageUrls = await Promise.all(
-				panelData.map((panel: { image: string }) => fetchImage(panel.image)),
+			const panelData: PanelData[] = await fetchShowcase();
+			const panelDataWithImages = await Promise.all(
+				panelData.map(async (panel) => {
+					const imageUrl = await fetchImage(panel.image);
+					return { ...panel, imageUrl };
+				}),
 			);
-			setPanels(() => imageUrls);
+			setPanels(() => panelDataWithImages);
 			setOpacities(() => {
 				const newOpacities = Array(panelData.length).fill(0);
 				newOpacities[0] = 1;
@@ -47,7 +57,12 @@ const ImagePanelCycle: React.FC = () => {
 	return (
 		<div className="relative w-full h-80 bg-black">
 			{panels.map((panel, index) => (
-				<ShowcasePanel key={index} imageUrl={panel} opacity={opacities[index]} />
+				<ShowcasePanel
+					key={index}
+					imageUrl={panel.imageUrl || ''}
+					opacity={opacities[index]}
+					text={panel.label}
+				/>
 			))}
 		</div>
 	);

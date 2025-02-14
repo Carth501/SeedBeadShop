@@ -3,7 +3,7 @@ from flask_cors import CORS
 from sqlalchemy.orm import Session
 import os
 
-from models import Product, SessionLocal
+from models import Panel, Product, SessionLocal
 
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +28,21 @@ def get_products():
         for product in products
     ]
     return jsonify(products_list)
+
+@app.route('/api/showcase', methods=['GET'])
+def get_showcase():
+	session = SessionLocal()
+	showcase = session.query(Panel).all()
+	session.close()
+	showcase_list = [
+		{
+			'image': product.image,
+			'label': product.label,
+			'description': product.description,
+		}
+		for product in showcase
+	]
+	return jsonify(showcase_list)
 
 @app.route('/api/assets/<path:filename>', methods=['GET'])
 def get_image(filename):

@@ -13,6 +13,7 @@ export const fetchProducts = async () => {
 };
 
 export const fetchImage = async (filename: string) => {
+	console.log('Fetching image:', filename);
 	try {
 		const response = await axios.get(`${API_BASE_URL}/assets/${filename}`, {
 			responseType: 'blob',
@@ -20,6 +21,16 @@ export const fetchImage = async (filename: string) => {
 		return URL.createObjectURL(response.data);
 	} catch (error) {
 		console.error('Error fetching image:', error);
+		throw error;
+	}
+};
+
+export const fetchShowcase = async () => {
+	try {
+		const response = await axios.get(`${API_BASE_URL}/showcase`);
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching showcase:', error);
 		throw error;
 	}
 };

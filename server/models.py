@@ -13,6 +13,13 @@ class Product(Base):
     description = Column(String, nullable=False)
     inStock = Column(Boolean, nullable=False)
 
+class Panel(Base):
+	__tablename__ = 'panels'
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	image = Column(String, nullable=False)
+	label = Column(String, nullable=False)
+	description = Column(String, nullable=False)
+
 DATABASE_URL = "sqlite:///products.db"
 
 engine = create_engine(DATABASE_URL)

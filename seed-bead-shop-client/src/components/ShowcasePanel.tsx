@@ -14,14 +14,10 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text }
 		>
 			<img src={imageUrl} alt="Panel" className="object-cover" />
 			{text && (
-				<div
-					className="absolute inset-0 flex justify-center items-center text-white text-2xl font-bold"
-					style={{
-						textShadow:
-							'2px 2px 4px rgba(0, 0, 0, 0.9), -2px -2px 4px rgba(0, 0, 0, 0.9), 2px -2px 4px rgba(0, 0, 0, 0.9), -2px 2px 4px rgba(0, 0, 0, 0.9)',
-					}}
-				>
-					{text}
+				<div className="absolute inset-0 flex justify-center items-center">
+					<div className="bg-black/60 p-3 rounded">
+						<span className="text-white text-2xl font-bold">{text}</span>
+					</div>
 				</div>
 			)}
 			<button

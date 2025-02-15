@@ -3,6 +3,7 @@ import './App.css';
 import Blossoms from './blossoms/blossoms';
 import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
+import ImageGallery from './ImageGallery';
 import ImageModal from './ImageModal';
 import ProductCard from './ProductCard';
 import { fetchProducts } from './services/apiService';
@@ -45,8 +46,10 @@ function App() {
 	return (
 		<>
 			<Header />
-			<ImagePanelCycle></ImagePanelCycle>
-			{/* <ImageGallery images={products[2]?.images || []} /> */}
+			<ImagePanelCycle />
+			<div className="h-40 -z-1000">
+				<ImageGallery images={products[2]?.images || []} />
+			</div>
 			<div
 				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
 			read-the-docsp-4 gap-4 w-screen p-4"

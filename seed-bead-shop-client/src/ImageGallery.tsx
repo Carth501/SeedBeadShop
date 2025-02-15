@@ -46,12 +46,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 	}, [images]);
 
 	return (
-		<div className="image-gallery fixed top-22 left-0 w-full h-full -z-10">
+		<div className="image-gallery left-0 w-full h-full -z-1000">
 			{imageSrcs.length > 0 && (
 				<img
 					src={imageSrcs[currentIndex]}
 					alt="Gallery"
-					className="image-gallery-display w-full h-60 object-cover rounded
+					className="image-gallery-display w-full h-40 object-cover rounded
 					overflow-hidden transition-opacity duration-500 ease-in-out"
 					style={{ opacity }}
 				/>

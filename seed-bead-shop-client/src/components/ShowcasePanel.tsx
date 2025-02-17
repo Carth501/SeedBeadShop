@@ -9,7 +9,7 @@ interface ShowcasePanelProps {
 const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text }) => {
 	return (
 		<div
-			className="absolute inset-0 flex justify-center items-center transition-opacity duration-1000 overflow-x-hidden"
+			className="absolute inset-0 flex justify-center items-center transition-opacity duration-1000 overflow-hidden"
 			style={{ opacity }}
 		>
 			<img src={imageUrl} alt="Panel" className="object-cover" />

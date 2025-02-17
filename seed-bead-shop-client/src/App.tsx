@@ -45,9 +45,9 @@ function App() {
 	return (
 		<>
 			<Header />
-			<div>
+			<div className="flex flex-col items-center items-stretch">
 				<ImagePanelCycle />
-				<div className="h-40 -z-1000">
+				<div className="h-40 -z-1000 flex justify-center items-center">
 					<ImageGallery images={products[2]?.images || []} />
 				</div>
 				<div

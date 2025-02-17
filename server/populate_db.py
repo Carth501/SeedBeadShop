@@ -1,4 +1,4 @@
-from models import Product, SessionLocal
+from models import Product, Panel, SessionLocal
 
 def populate_db():
     session = SessionLocal()
@@ -33,6 +33,19 @@ def populate_db():
         ),
     ]
     session.add_all(products)
+    showcase = [
+        Panel(
+			image='earrings_1.png',
+			label='Product 1',
+			description='Description of product 1',
+		),
+        Panel(
+			image='earrings_2.png',
+			label='Product 2',
+			description='Description of product 2',
+		),
+	]
+    session.add_all(showcase)
     session.commit()
     session.close()
 

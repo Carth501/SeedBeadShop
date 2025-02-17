@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Blossoms from './blossoms/blossoms';
+import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
 import ImageGallery from './ImageGallery';
 import ImageModal from './ImageModal';
@@ -45,28 +45,34 @@ function App() {
 	return (
 		<>
 			<Header />
-			<ImageGallery images={products[2]?.images || []} />
-			<div
-				className="product-row flex justify-center overflow-x-auto overflow-y-visible 
-			read-the-docsp-4 gap-4 w-screen p-4"
-			>
-				{products.map((product, index) => (
-					<ProductCard
-						key={index}
-						id={index}
-						price={product.price}
-						label={product.label}
-						description={product.description}
-						inStock={product.inStock}
-						images={product.images}
-						onImageClick={handleImageClick}
-					/>
-				))}
+			<div className="flex flex-col items-center items-stretch">
+				<ImagePanelCycle />
+				<div className="h-40 -z-1000 flex justify-center items-center">
+					<ImageGallery images={products[2]?.images || []} />
+				</div>
+				<div
+					className="product-row flex justify-center overflow-x-auto overflow-y-visible 
+				read-the-docsp-4 gap-4 w-screen p-4"
+				>
+					{products.map((product, index) => (
+						<ProductCard
+							key={index}
+							id={index}
+							price={product.price}
+							label={product.label}
+							description={product.description}
+							inStock={product.inStock}
+							images={product.images}
+							onImageClick={handleImageClick}
+						/>
+					))}
+				</div>
+				<ImageModal
+					images={currentImages}
+					isOpen={isModalOpen}
+					onClose={handleCloseModal}
+				/>
 			</div>
-			<div className="absolute top-0 left-0 w-[95%] h-screen -z-1">
-				<Blossoms />
-			</div>
-			<ImageModal images={currentImages} isOpen={isModalOpen} onClose={handleCloseModal} />
 			<div className="fixed inset-0 bg-white opacity-50 -z-1000"></div>
 		</>
 	);

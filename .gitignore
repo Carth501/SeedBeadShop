@@ -12,3 +12,4 @@ eslint.config.mjs
 *.svg
 *.webp
 *.ico
+__pycache__/

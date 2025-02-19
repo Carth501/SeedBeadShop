@@ -19,6 +19,7 @@ def get_products():
     session.close()
     products_list = [
         {
+            'id': product.id,
             'images': product.images.split(','),
             'price': product.price,
             'label': product.label,

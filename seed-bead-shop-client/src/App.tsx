@@ -79,7 +79,7 @@ function App() {
 	};
 
 	return (
-		<>
+		<div className="bg-white w-full h-full flex flex-col items-center">
 			<Header shoppingCartClick={handleToggleCart} />
 			<div className="flex flex-col items-stretch">
 				<ImagePanelCycle />
@@ -116,8 +116,7 @@ function App() {
 					onClose={handleToggleCart}
 				/>
 			</div>
-			<div className="fixed inset-0 bg-white opacity-50 -z-1000"></div>
-		</>
+		</div>
 	);
 }
 

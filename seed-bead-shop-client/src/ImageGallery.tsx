@@ -46,7 +46,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 	}, [images]);
 
 	return (
-		<div className="image-gallery left-0 w-full h-full max-w-[1024px] -z-1000 flex flex-col justify-center">
+		<div className="image-gallery left-0 w-full h-full max-w-[1024px] flex flex-col justify-center">
 			{imageSrcs.length > 0 && (
 				<img
 					src={imageSrcs[currentIndex]}

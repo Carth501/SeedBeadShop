@@ -15,6 +15,19 @@ interface ShoppingCartProps {
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, onClose }) => {
+	console.log('Cart items:', items);
+
+	const totalPrice = items
+		.reduce((total, item) => {
+			const price = parseFloat(item.price);
+			if (isNaN(price)) {
+				console.error(`Invalid price for item ${item.id}: ${item.price}`);
+				return total;
+			}
+			return total + price * item.quantity;
+		}, 0)
+		.toFixed(2);
+
 	return (
 		<div
 			className={`fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 ${
@@ -22,15 +35,17 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, on
 			}`}
 			style={{ width: '300px' }}
 		>
-			<div className="p-4">
-				<h2 className="text-xl font-bold mb-4">Shopping Cart</h2>
-				<button className="absolute top-4 right-4 text-red-500" onClick={onClose}>
-					Close
-				</button>
+			<div className="p-4 flex flex-col h-full">
+				<div className="flex justify-between items-center mb-4">
+					<h2 className="text-xl font-bold">Shopping Cart</h2>
+					<button className="text-red-500" onClick={onClose}>
+						Close
+					</button>
+				</div>
 				{items.length === 0 ? (
 					<p>Your cart is empty.</p>
 				) : (
-					<ul>
+					<ul className="flex-grow overflow-y-auto">
 						{items.map((item) => (
 							<li key={item.id} className="flex justify-between items-center mb-2">
 								<div>
@@ -43,6 +58,17 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, on
 							</li>
 						))}
 					</ul>
+				)}
+				{items.length > 0 && (
+					<div className="mt-4">
+						<div className="flex justify-between items-center mb-4">
+							<span className="font-bold">Total:</span>
+							<span className="font-bold">${totalPrice}</span>
+						</div>
+						<button className="w-full bg-blue-500 text-white py-2 rounded">
+							Checkout
+						</button>
+					</div>
 				)}
 			</div>
 		</div>

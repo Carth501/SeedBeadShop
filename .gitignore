@@ -13,3 +13,4 @@ eslint.config.mjs
 *.webp
 *.ico
 __pycache__/
+/server/__pycache__

@@ -11,6 +11,7 @@ interface ProductCardProps {
 	inStock: boolean;
 	images: string[];
 	onImageClick: (id: number) => void;
+	onAddToCart: (id: number) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -21,6 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	inStock,
 	images,
 	onImageClick,
+	onAddToCart,
 }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -42,6 +44,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
 	const handleCloseModal = () => {
 		setModalOpen(false);
+	};
+
+	const handleAddToCart = () => {
+		console.log('Add to cart:', id);
+		onAddToCart(id);
 	};
 
 	return (
@@ -68,7 +75,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			</div>
 			<div className="flex flex-col items-stretch">
 				<ProductButton label="One-Click Buy" onClick={() => console.log('One-Click Buy')} />
-				<ProductButton label="Add to Cart" onClick={() => console.log('Add to Cart')} />
+				<ProductButton
+					label="Add to Cart"
+					onClick={() => {
+						handleAddToCart();
+					}}
+				/>
 			</div>
 			<ImageModal images={images} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>

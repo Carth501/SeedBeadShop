@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import ShoppingCart from './components/ShoppingCart';
 import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
 import ImageGallery from './ImageGallery';
@@ -8,6 +9,7 @@ import ProductCard from './ProductCard';
 import { fetchProducts } from './services/apiService';
 
 interface Product {
+	id: number;
 	images: string[];
 	price: string;
 	label: string;
@@ -15,10 +17,19 @@ interface Product {
 	inStock: boolean;
 }
 
+interface CartItem {
+	id: number;
+	label: string;
+	price: string;
+	quantity: number;
+}
+
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [currentImages, setCurrentImages] = useState<string[]>([]);
 	const [products, setProducts] = useState<Product[]>([]);
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const [isCartOpen, setCartOpen] = useState(false);
 
 	useEffect(() => {
 		const loadProducts = async () => {
@@ -42,10 +53,35 @@ function App() {
 		setModalOpen(false);
 	};
 
+	const handleAddToCart = (product: Product) => {
+		setCartItems((prevItems) => {
+			const existingItem = prevItems.find((item) => item.id === product.id);
+			if (existingItem) {
+				return prevItems.map((item) =>
+					item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
+				);
+			} else {
+				return [
+					...prevItems,
+					{ id: product.id, label: product.label, price: product.price, quantity: 1 },
+				];
+			}
+		});
+		console.log(product);
+	};
+
+	const handleRemoveFromCart = (id: number) => {
+		setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+	};
+
+	const handleToggleCart = () => {
+		setCartOpen((prevOpen) => !prevOpen);
+	};
+
 	return (
 		<>
-			<Header />
-			<div className="flex flex-col items-center items-stretch">
+			<Header shoppingCartClick={handleToggleCart} />
+			<div className="flex flex-col items-stretch">
 				<ImagePanelCycle />
 				<div className="h-40 -z-1000 flex justify-center items-center">
 					<ImageGallery images={products[2]?.images || []} />
@@ -64,6 +100,7 @@ function App() {
 							inStock={product.inStock}
 							images={product.images}
 							onImageClick={handleImageClick}
+							onAddToCart={() => handleAddToCart(product)}
 						/>
 					))}
 				</div>
@@ -71,6 +108,12 @@ function App() {
 					images={currentImages}
 					isOpen={isModalOpen}
 					onClose={handleCloseModal}
+				/>
+				<ShoppingCart
+					items={cartItems}
+					onRemove={handleRemoveFromCart}
+					isOpen={isCartOpen}
+					onClose={handleToggleCart}
 				/>
 			</div>
 			<div className="fixed inset-0 bg-white opacity-50 -z-1000"></div>

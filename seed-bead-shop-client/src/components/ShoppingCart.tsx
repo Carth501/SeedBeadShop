@@ -11,10 +11,9 @@ interface ShoppingCartProps {
 	items: CartItem[];
 	onRemove: (id: number) => void;
 	isOpen: boolean;
-	onClose: () => void;
 }
 
-const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, onClose }) => {
+const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) => {
 	console.log('Cart items:', items);
 
 	const totalPrice = items
@@ -35,13 +34,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, on
 			}`}
 			style={{ width: '300px' }}
 		>
-			<div className="p-4 flex flex-col h-full">
-				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-bold">Shopping Cart</h2>
-					<button className="text-red-500" onClick={onClose}>
-						Close
-					</button>
-				</div>
+			<div className="p-4 pt-25 flex flex-col h-full">
 				{items.length === 0 ? (
 					<p>Your cart is empty.</p>
 				) : (

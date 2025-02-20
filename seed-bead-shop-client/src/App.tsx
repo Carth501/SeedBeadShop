@@ -113,7 +113,6 @@ function App() {
 					items={cartItems}
 					onRemove={handleRemoveFromCart}
 					isOpen={isCartOpen}
-					onClose={handleToggleCart}
 				/>
 			</div>
 		</div>

@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 	return (
 		<header
 			className="align-middle border-b-solid border-b-2 
-		border-b-gray-300 w-[100vw] top-0 left-0"
+		border-b-gray-300 w-[100vw] top-0 left-0 z-50 fixed"
 		>
 			<div className="background flex justify-between p-4">
 				<div

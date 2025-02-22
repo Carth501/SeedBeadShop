@@ -11,7 +11,6 @@ interface ProductCardProps {
 	inStock: boolean;
 	images: string[];
 	onImageClick: (id: number) => void;
-	onAddToCart: (id: number) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -22,7 +21,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	inStock,
 	images,
 	onImageClick,
-	onAddToCart,
 }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -46,14 +44,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		setModalOpen(false);
 	};
 
-	const handleAddToCart = () => {
-		console.log('Add to cart:', id);
-		onAddToCart(id);
+	const handleView = () => {
+		console.log('View:', id);
 	};
 
 	return (
 		<div
-			className={`border border-gray-300 rounded-lg p-4 w-[200px] transition-all duration-300
+			className={`border border-gray-300 rounded-lg p-4 w-[200px] h-100 transition-all duration-300
 			shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
 			justify-between
 			${!isModalOpen ? 'hover' : ''}`}
@@ -74,11 +71,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
 			</div>
 			<div className="flex flex-col items-stretch">
-				<ProductButton label="One-Click Buy" onClick={() => console.log('One-Click Buy')} />
 				<ProductButton
-					label="Add to Cart"
+					label="View"
 					onClick={() => {
-						handleAddToCart();
+						handleView();
 					}}
 				/>
 			</div>

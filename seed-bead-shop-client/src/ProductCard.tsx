@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
 import { fetchImage } from './services/apiService';
@@ -24,6 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const loadImage = async () => {
@@ -45,15 +47,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	};
 
 	const handleView = () => {
-		console.log('View:', id);
+		navigate(`/product/${id}`);
 	};
 
 	return (
 		<div
 			className={`border border-gray-300 rounded-lg p-4 w-[200px] h-100 transition-all duration-300
-			shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
-			justify-between
-			${!isModalOpen ? 'hover' : ''}`}
+            shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
+            justify-between
+            ${!isModalOpen ? 'hover' : ''}`}
 		>
 			<div>
 				{imageSrc && (
@@ -61,7 +63,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 						src={imageSrc}
 						alt={label}
 						className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
-						transition-transform duration-300"
+                        transition-transform duration-300"
 						onClick={() => onImageClick(id)}
 					/>
 				)}
@@ -71,12 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
 			</div>
 			<div className="flex flex-col items-stretch">
-				<ProductButton
-					label="View"
-					onClick={() => {
-						handleView();
-					}}
-				/>
+				<ProductButton label="View" onClick={handleView} />
 			</div>
 			<ImageModal images={images} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>

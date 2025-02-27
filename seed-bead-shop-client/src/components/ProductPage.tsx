@@ -17,7 +17,7 @@ interface ProductPageProps {
 
 const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 	const { id } = useParams<{ id: string }>();
-	const product = products.find((p) => p.id === parseInt(id));
+	const product = id ? products.find((p) => p.id === parseInt(id)) : undefined;
 
 	if (!product) {
 		return <div>Product not found</div>;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import ProductPage from './components/ProductPage';
 import ShoppingCart from './components/ShoppingCart';
 import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
@@ -54,7 +55,7 @@ function App() {
 		setModalOpen(false);
 	};
 
-	const onAddToCart = (product: Product) => {
+	const handleAddToCart = (product: Product) => {
 		setCartItems((prevItems) => {
 			const existingItem = prevItems.find((item) => item.id === product.id);
 			if (existingItem) {
@@ -83,39 +84,50 @@ function App() {
 		<Router>
 			<div className="bg-white w-full h-full flex flex-col items-center">
 				<Header shoppingCartClick={handleToggleCart} />
-				<div className="flex flex-col items-stretch">
-					<ImagePanelCycle />
-					<div className="h-40 flex justify-center items-center">
-						<ImageGallery images={products[2]?.images || []} />
-					</div>
-					<div
-						className="product-row flex justify-center overflow-x-auto
-						overflow-y-visible read-the-docsp-4 gap-4 w-screen p-4"
-					>
-						{products.map((product, index) => (
-							<ProductCard
-								key={index}
-								id={index}
-								price={product.price}
-								label={product.label}
-								description={product.description}
-								inStock={product.inStock}
-								images={product.images}
-								onImageClick={handleImageClick}
-							/>
-						))}
-					</div>
-					<ImageModal
-						images={currentImages}
-						isOpen={isModalOpen}
-						onClose={handleCloseModal}
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<div className="flex flex-col items-stretch">
+								<ImagePanelCycle />
+								<div className="h-40 flex justify-center items-center">
+									<ImageGallery images={products[2]?.images || []} />
+								</div>
+								<div
+									className="product-row flex justify-center overflow-x-auto
+								overflow-y-visible read-the-docsp-4 gap-4 w-screen p-4"
+								>
+									{products.map((product, index) => (
+										<ProductCard
+											key={index}
+											id={index}
+											price={product.price}
+											label={product.label}
+											description={product.description}
+											inStock={product.inStock}
+											images={product.images}
+											onImageClick={handleImageClick}
+										/>
+									))}
+								</div>
+								<ImageModal
+									images={currentImages}
+									isOpen={isModalOpen}
+									onClose={handleCloseModal}
+								/>
+								<ShoppingCart
+									items={cartItems}
+									onRemove={handleRemoveFromCart}
+									isOpen={isCartOpen}
+								/>
+							</div>
+						}
 					/>
-					<ShoppingCart
-						items={cartItems}
-						onRemove={handleRemoveFromCart}
-						isOpen={isCartOpen}
+					<Route
+						path="/product/:id"
+						element={<ProductPage products={products} onAddToCart={handleAddToCart} />}
 					/>
-				</div>
+				</Routes>
 			</div>
 		</Router>
 	);

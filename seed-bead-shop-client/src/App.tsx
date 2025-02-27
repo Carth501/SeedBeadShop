@@ -82,7 +82,7 @@ function App() {
 
 	return (
 		<Router>
-			<div className="bg-white w-full h-full flex flex-col items-center">
+			<div className="w-full h-full flex flex-col items-center">
 				<Header shoppingCartClick={handleToggleCart} />
 				<Routes>
 					<Route

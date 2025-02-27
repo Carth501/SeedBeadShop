@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
 	shoppingCartClick: () => void;
@@ -7,6 +8,12 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 	const handleCartClick = () => {
 		shoppingCartClick();
+	};
+
+	const navigate = useNavigate();
+
+	const handleLogoClick = () => {
+		navigate('/');
 	};
 
 	return (
@@ -18,7 +25,8 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 				<div
 					className="text-2xl font-bold h-[2em] p-[1.25em] 
 				align-middle hover:drop-shadow-[0_0_2em_#646cffaa] flex
-				items-center justify-center"
+				items-center justify-center cursor-pointer"
+					onClick={handleLogoClick}
 				>
 					Logo
 				</div>

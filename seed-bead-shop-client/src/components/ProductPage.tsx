@@ -20,6 +20,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 	const { id } = useParams<{ id: string }>();
 	const product = id ? products.find((p) => p.id === parseInt(id)) : undefined;
 	const [imageUrls, setImageUrls] = useState<string[]>([]);
+	const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
 	useEffect(() => {
 		const loadImages = async () => {
@@ -29,6 +30,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 						product.images.map((image) => fetchImage(image)),
 					);
 					setImageUrls(urls);
+					setCurrentImageIndex(0); // Set the first image as the main image initially
 				} catch (error) {
 					console.error('Error fetching images:', error);
 				}
@@ -44,10 +46,29 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 
 	return (
 		<div className="product-page p-4 flex flex-row gap-4">
-			{imageUrls.length > 0 && (
-				<img src={imageUrls[0]} alt={product.label} className="w-full h-auto mb-4" />
-			)}
-			<div>
+			<div className="flex flex-row gap-2">
+				<div className="flex flex-col gap-2">
+					{imageUrls.map((url, index) => (
+						<img
+							key={index}
+							src={url}
+							alt={`${product.label} preview ${index + 1}`}
+							className={`w-20 h-20 object-cover cursor-pointer border border-gray-300 rounded ${
+								index === currentImageIndex ? 'border-blue-500' : ''
+							}`}
+							onClick={() => setCurrentImageIndex(index)}
+						/>
+					))}
+				</div>
+				{imageUrls.length > 0 && (
+					<img
+						src={imageUrls[currentImageIndex]}
+						alt={product.label}
+						className="w-full h-auto mb-4"
+					/>
+				)}
+			</div>
+			<div className="flex flex-col">
 				<h1 className="text-2xl font-bold mb-4">{product.label}</h1>
 				<p className="mb-4">{product.description}</p>
 				<p className="mb-4">Price: {product.price}</p>

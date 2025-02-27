@@ -47,7 +47,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 	return (
 		<div className="product-page p-4 flex flex-row gap-4">
 			<div className="flex flex-row">
-				<div className="flex flex-col gap-2 overflow-y-scroll max-h-40 pr-3">
+				<div className="flex flex-col gap-2 overflow-y-scroll max-h-100 pr-3">
 					{imageUrls.map((url, index) => (
 						<img
 							key={index}

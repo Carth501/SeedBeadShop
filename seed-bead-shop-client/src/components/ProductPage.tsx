@@ -46,14 +46,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 
 	return (
 		<div className="product-page p-4 flex flex-row gap-4">
-			<div className="flex flex-row gap-2">
-				<div className="flex flex-col gap-2">
+			<div className="flex flex-row">
+				<div className="flex flex-col gap-2 overflow-y-scroll max-h-40 pr-3">
 					{imageUrls.map((url, index) => (
 						<img
 							key={index}
 							src={url}
 							alt={`${product.label} preview ${index + 1}`}
-							className={`w-20 h-20 object-cover cursor-pointer border border-gray-300 rounded ${
+							className={`w-20 h-20 object-cover cursor-pointer border border-gray-300 rounded-lg ${
 								index === currentImageIndex ? 'border-blue-500' : ''
 							}`}
 							onClick={() => setCurrentImageIndex(index)}
@@ -64,7 +64,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 					<img
 						src={imageUrls[currentImageIndex]}
 						alt={product.label}
-						className="w-full h-auto mb-4"
+						className="w-full h-auto mb-4 max-w-150 max-h-150 rounded-lg"
 					/>
 				)}
 			</div>

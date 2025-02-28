@@ -1,14 +1,35 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ProductCard from '../ProductCard';
 import { fetchProducts } from '../services/apiService';
 import { Product } from '../types';
 
 const SearchPage: React.FC = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
 	const [products, setProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
 	const [color, setColor] = useState<string>('');
-	const [type, setType] = useState<string>('');
+	const [category, setCategory] = useState<string>('');
+
+	useEffect(() => {
+		const params = new URLSearchParams(location.search);
+		const minPrice = params.get('minPrice');
+		const maxPrice = params.get('maxPrice');
+		const color = params.get('color');
+		const category = params.get('category');
+
+		if (minPrice && maxPrice) {
+			setPriceRange([Number(minPrice), Number(maxPrice)]);
+		}
+		if (color) {
+			setColor(color);
+		}
+		if (category) {
+			setCategory(category);
+		}
+	}, [location.search]);
 
 	useEffect(() => {
 		const loadProducts = async () => {
@@ -37,18 +58,29 @@ const SearchPage: React.FC = () => {
 			);
 		}
 
-		if (type) {
+		if (category) {
 			filtered = filtered.filter((product) =>
-				product.label.toLowerCase().includes(type.toLowerCase()),
+				product.label.toLowerCase().includes(category.toLowerCase()),
 			);
 		}
 
 		setFilteredProducts(filtered);
-	}, [products, priceRange, color, type]);
+
+		const params = new URLSearchParams();
+		params.set('minPrice', priceRange[0].toString());
+		params.set('maxPrice', priceRange[1].toString());
+		if (color) {
+			params.set('color', color);
+		}
+		if (category) {
+			params.set('category', category);
+		}
+		navigate({ search: params.toString() });
+	}, [products, priceRange, color, category, navigate]);
 
 	useEffect(() => {
 		handleFilterChange();
-	}, [priceRange, color, type, handleFilterChange]);
+	}, [priceRange, color, category, handleFilterChange]);
 
 	return (
 		<div className="search-page flex flex-row flex-start gap-4 p-4 h-full w-full">
@@ -84,9 +116,9 @@ const SearchPage: React.FC = () => {
 						placeholder="Color"
 					/>
 				</div>
-				<div className="type-filter">
-					<h3>Type</h3>
-					<select value={type} onChange={(e) => setType(e.target.value)}>
+				<div className="category-filter">
+					<h3>Category</h3>
+					<select value={category} onChange={(e) => setCategory(e.target.value)}>
 						<option value="">All</option>
 						<option value="earring">Earring</option>
 						<option value="necklace">Necklace</option>

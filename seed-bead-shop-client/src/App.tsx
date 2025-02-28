@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import ProductPage from './components/ProductPage';
+import SearchPage from './components/SearchPage';
 import ShoppingCart from './components/ShoppingCart';
 import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
@@ -101,6 +102,7 @@ function App() {
 						path="/product/:id"
 						element={<ProductPage products={products} onAddToCart={handleAddToCart} />}
 					/>
+					<Route path="/search/" element={<SearchPage />} />
 				</Routes>
 				<ShoppingCart
 					items={cartItems}

@@ -1,45 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import HomePage from './components/HomePage';
 import ProductPage from './components/ProductPage';
 import SearchPage from './components/SearchPage';
 import ShoppingCart from './components/ShoppingCart';
-import ImagePanelCycle from './components/ShowcasePanelCycle';
 import Header from './Header';
-import ImageGallery from './ImageGallery';
-import ImageModal from './ImageModal';
-import ProductCard from './ProductCard';
-import { fetchProducts } from './services/apiService';
 import { CartItem, Product } from './types';
 
 function App() {
-	const [isModalOpen, setModalOpen] = useState(false);
-	const [currentImages, setCurrentImages] = useState<string[]>([]);
-	const [products, setProducts] = useState<Product[]>([]);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 	const [isCartOpen, setCartOpen] = useState(false);
-
-	useEffect(() => {
-		const loadProducts = async () => {
-			try {
-				const productsData = await fetchProducts();
-				setProducts(productsData);
-			} catch (error) {
-				console.error('Error loading products:', error);
-			}
-		};
-
-		loadProducts();
-	}, []);
-
-	const handleImageClick = (id: number) => {
-		setCurrentImages(products[id].images);
-		setModalOpen(true);
-	};
-
-	const handleCloseModal = () => {
-		setModalOpen(false);
-	};
 
 	const handleAddToCart = (product: Product) => {
 		setCartItems((prevItems) => {
@@ -70,37 +41,10 @@ function App() {
 			<div className="w-[100vw] h-[100vh] flex flex-col items-center pt-23 px-4">
 				<Header shoppingCartClick={handleToggleCart} />
 				<Routes>
-					<Route
-						path="/"
-						element={
-							<div className="flex flex-col items-stretch">
-								<ImagePanelCycle />
-								<div className="h-40 flex justify-center items-center">
-									<ImageGallery images={products[2]?.images || []} />
-								</div>
-								<div
-									className="product-row flex justify-center overflow-x-auto
-								overflow-y-visible read-the-docsp-4 gap-4 w-screen p-4"
-								>
-									{products.map((product, index) => (
-										<ProductCard
-											key={index}
-											product={product}
-											onImageClick={handleImageClick}
-										/>
-									))}
-								</div>
-								<ImageModal
-									images={currentImages}
-									isOpen={isModalOpen}
-									onClose={handleCloseModal}
-								/>
-							</div>
-						}
-					/>
+					<Route path="/" element={<HomePage />} />
 					<Route
 						path="/product/:id"
-						element={<ProductPage products={products} onAddToCart={handleAddToCart} />}
+						element={<ProductPage products={[]} onAddToCart={handleAddToCart} />}
 					/>
 					<Route path="/search/" element={<SearchPage />} />
 				</Routes>

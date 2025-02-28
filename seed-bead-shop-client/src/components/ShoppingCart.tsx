@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface CartItem {
-	id: number;
-	label: string;
-	price: string;
-	quantity: number;
-}
+import { CartItem } from '../types';
 
 interface ShoppingCartProps {
 	items: CartItem[];
@@ -18,12 +12,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 
 	const totalPrice = items
 		.reduce((total, item) => {
-			const price = parseFloat(item.price);
-			if (isNaN(price)) {
-				console.error(`Invalid price for item ${item.id}: ${item.price}`);
-				return total;
-			}
-			return total + price * item.quantity;
+			return total + item.product.price * item.quantity;
 		}, 0)
 		.toFixed(2);
 
@@ -40,12 +29,18 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 				) : (
 					<ul className="flex-grow overflow-y-auto">
 						{items.map((item) => (
-							<li key={item.id} className="flex justify-between items-center mb-2">
+							<li
+								key={item.product.id}
+								className="flex justify-between items-center mb-2"
+							>
 								<div>
-									<span className="font-bold">{item.label}</span> - {item.price} x{' '}
-									{item.quantity}
+									<span className="font-bold">{item.product.label}</span> -{' '}
+									{item.product.price} x {item.quantity}
 								</div>
-								<button className="text-red-500" onClick={() => onRemove(item.id)}>
+								<button
+									className="text-red-500"
+									onClick={() => onRemove(item.product.id)}
+								>
 									Remove
 								</button>
 							</li>

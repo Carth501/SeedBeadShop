@@ -9,22 +9,7 @@ import ImageGallery from './ImageGallery';
 import ImageModal from './ImageModal';
 import ProductCard from './ProductCard';
 import { fetchProducts } from './services/apiService';
-
-interface Product {
-	id: number;
-	images: string[];
-	price: string;
-	label: string;
-	description: string;
-	inStock: boolean;
-}
-
-interface CartItem {
-	id: number;
-	label: string;
-	price: string;
-	quantity: number;
-}
+import { CartItem, Product } from './types';
 
 function App() {
 	const [isModalOpen, setModalOpen] = useState(false);
@@ -57,23 +42,22 @@ function App() {
 
 	const handleAddToCart = (product: Product) => {
 		setCartItems((prevItems) => {
-			const existingItem = prevItems.find((item) => item.id === product.id);
+			const existingItem = prevItems.find((item) => item.product.id === product.id);
 			if (existingItem) {
 				return prevItems.map((item) =>
-					item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
+					item.product.id === product.id
+						? { ...item, quantity: item.quantity + 1 }
+						: item,
 				);
 			} else {
-				return [
-					...prevItems,
-					{ id: product.id, label: product.label, price: product.price, quantity: 1 },
-				];
+				return [...prevItems, { product: product, quantity: 1 }];
 			}
 		});
 		setCartOpen(true);
 	};
 
 	const handleRemoveFromCart = (id: number) => {
-		setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+		setCartItems((prevItems) => prevItems.filter((item) => item.product.id !== id));
 	};
 
 	const handleToggleCart = () => {
@@ -100,12 +84,7 @@ function App() {
 									{products.map((product, index) => (
 										<ProductCard
 											key={index}
-											id={index}
-											price={product.price}
-											label={product.label}
-											description={product.description}
-											inStock={product.inStock}
-											images={product.images}
+											product={product}
 											onImageClick={handleImageClick}
 										/>
 									))}

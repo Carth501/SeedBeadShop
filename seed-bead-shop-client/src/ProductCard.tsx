@@ -3,35 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
 import { fetchImage } from './services/apiService';
+import { Product } from './types';
 
 interface ProductCardProps {
-	id: number;
-	price: string;
-	label: string;
-	description: string;
-	inStock: boolean;
-	images: string[];
+	product: Product;
 	onImageClick: (id: number) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-	id,
-	price,
-	label,
-	description,
-	inStock,
-	images,
-	onImageClick,
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		const loadImage = async () => {
-			if (images.length > 0) {
+			if (product.images.length > 0) {
 				try {
-					const imageUrl = await fetchImage(images[0]);
+					const imageUrl = await fetchImage(product.images[0]);
 					setImageSrc(imageUrl);
 				} catch (error) {
 					console.error('Error fetching image:', error);
@@ -40,14 +28,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		};
 
 		loadImage();
-	}, [images]);
+	}, [product.images]);
 
 	const handleCloseModal = () => {
 		setModalOpen(false);
 	};
 
 	const handleView = () => {
-		navigate(`/product/${id}`);
+		navigate(`/product/${product.id}`);
 	};
 
 	return (
@@ -61,21 +49,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				{imageSrc && (
 					<img
 						src={imageSrc}
-						alt={label}
+						alt={product.label}
 						className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
                         transition-transform duration-300"
-						onClick={() => onImageClick(id)}
+						onClick={() => onImageClick(product.id)}
 					/>
 				)}
-				<h2 className="text-left m-0">{label}</h2>
-				<p className="text-left m-0">{description}</p>
-				<p className="text-left m-0">{price}</p>
-				<p className="text-left m-0">{inStock ? 'In Stock' : 'Out of Stock'}</p>
+				<h2 className="text-left m-0">{product.label}</h2>
+				<p className="text-left m-0">{product.description}</p>
+				<p className="text-left m-0">${product.price.toFixed(2)}</p>
+				<p className="text-left m-0">{product.inStock ? 'In Stock' : 'Out of Stock'}</p>
 			</div>
 			<div className="flex flex-col items-stretch">
 				<ProductButton label="View" onClick={handleView} />
 			</div>
-			<ImageModal images={images} isOpen={isModalOpen} onClose={handleCloseModal} />
+			<ImageModal images={product.images} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>
 	);
 };

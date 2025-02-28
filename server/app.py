@@ -17,8 +17,9 @@ def get_products():
     session = SessionLocal()
     products = session.query(Product).all()
     session.close()
-    products_list = [
-        {
+    products_list = []
+    for product in products:
+        product_dict = {
             'id': product.id,
             'images': product.images.split(','),
             'price': product.price,
@@ -26,8 +27,7 @@ def get_products():
             'description': product.description,
             'inStock': product.inStock,
         }
-        for product in products
-    ]
+        products_list.append(product_dict)
     return jsonify(products_list)
 
 @app.route('/api/showcase', methods=['GET'])

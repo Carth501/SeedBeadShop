@@ -57,7 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 				)}
 				<h2 className="text-left m-0">{product.label}</h2>
 				<p className="text-left m-0">{product.description}</p>
-				<p className="text-left m-0">{product.price}</p>
+				<p className="text-left m-0">${product.price.toFixed(2)}</p>
 				<p className="text-left m-0">{product.inStock ? 'In Stock' : 'Out of Stock'}</p>
 			</div>
 			<div className="flex flex-col items-stretch">

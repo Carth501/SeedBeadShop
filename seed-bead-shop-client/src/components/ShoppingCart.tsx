@@ -12,12 +12,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 
 	const totalPrice = items
 		.reduce((total, item) => {
-			const price = parseFloat(item.product.price);
-			if (isNaN(price)) {
-				console.error(`Invalid price for item ${item.product.id}: ${item.product.price}`);
-				return total;
-			}
-			return total + price * item.quantity;
+			return total + item.product.price * item.quantity;
 		}, 0)
 		.toFixed(2);
 

@@ -22,7 +22,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 						product.images.map((image) => fetchImage(image)),
 					);
 					setImageUrls(urls);
-					setCurrentImageIndex(0); // Set the first image as the main image initially
+					setCurrentImageIndex(0);
 				} catch (error) {
 					console.error('Error fetching images:', error);
 				}
@@ -63,7 +63,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
 			<div className="flex flex-col">
 				<h1 className="text-2xl font-bold mb-4">{product.label}</h1>
 				<p className="mb-4">{product.description}</p>
-				<p className="mb-4">Price: {product.price}</p>
+				<p className="mb-4">Price: ${product.price.toFixed(2)}</p>
 				<p className="mb-4">In Stock: {product.inStock ? 'Yes' : 'No'}</p>
 				<button
 					className="bg-blue-500 text-white py-2 px-4 rounded"

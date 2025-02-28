@@ -12,19 +12,19 @@ const CategoriesBar: React.FC = () => {
 		<div className="categories-bar flex justify-center gap-4 p-4">
 			<button
 				className="bg-blue-500 text-white py-2 px-4 rounded"
-				onClick={() => handleCategorySelect('earrings')}
+				onClick={() => handleCategorySelect('earring')}
 			>
 				Earrings
 			</button>
 			<button
 				className="bg-blue-500 text-white py-2 px-4 rounded"
-				onClick={() => handleCategorySelect('necklaces')}
+				onClick={() => handleCategorySelect('necklace')}
 			>
 				Necklaces
 			</button>
 			<button
 				className="bg-blue-500 text-white py-2 px-4 rounded"
-				onClick={() => handleCategorySelect('bracelets')}
+				onClick={() => handleCategorySelect('bracelet')}
 			>
 				Bracelets
 			</button>

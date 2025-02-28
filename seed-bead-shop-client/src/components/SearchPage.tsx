@@ -51,8 +51,8 @@ const SearchPage: React.FC = () => {
 	}, [priceRange, color, type, handleFilterChange]);
 
 	return (
-		<div className="search-page flex flex-row gap-4 p-4 h-full w-full">
-			<div className="controls flex flex-col gap-4 w-1/4">
+		<div className="search-page flex flex-row flex-start gap-4 p-4 h-full w-full">
+			<div id="search-controls" className="flex flex-col gap-4">
 				<div className="price-range">
 					<h3>Price Range</h3>
 					<div className="flex flex-row gap-2">
@@ -94,7 +94,10 @@ const SearchPage: React.FC = () => {
 					</select>
 				</div>
 			</div>
-			<div className="product-grid grid grid-cols-3 gap-4 w-3/4">
+			<div
+				id="product-grid"
+				className="flex flex-row flex-wrap gap-4 justify-start items-start"
+			>
 				{filteredProducts.map((product) => (
 					<ProductCard key={product.id} product={product} onImageClick={() => {}} />
 				))}

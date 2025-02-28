@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchImage } from '../services/apiService';
-
-interface Product {
-	id: number;
-	images: string[];
-	price: string;
-	label: string;
-	description: string;
-	inStock: boolean;
-}
+import { Product } from '../types';
 
 interface ProductPageProps {
 	products: Product[];

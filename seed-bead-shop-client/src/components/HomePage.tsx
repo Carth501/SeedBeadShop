@@ -4,6 +4,7 @@ import ImageModal from '../ImageModal';
 import ProductCard from '../ProductCard';
 import { fetchProducts } from '../services/apiService';
 import { Product } from '../types';
+import CategoriesBar from './CategoriesBar';
 import ImagePanelCycle from './ShowcasePanelCycle';
 
 const HomePage: React.FC = () => {
@@ -35,6 +36,7 @@ const HomePage: React.FC = () => {
 
 	return (
 		<div className="flex flex-col items-stretch">
+			<CategoriesBar />
 			<ImagePanelCycle />
 			<div className="h-40 flex justify-center items-center">
 				<ImageGallery images={products[2]?.images || []} />

@@ -115,11 +115,6 @@ function App() {
 									isOpen={isModalOpen}
 									onClose={handleCloseModal}
 								/>
-								<ShoppingCart
-									items={cartItems}
-									onRemove={handleRemoveFromCart}
-									isOpen={isCartOpen}
-								/>
 							</div>
 						}
 					/>
@@ -128,6 +123,11 @@ function App() {
 						element={<ProductPage products={products} onAddToCart={handleAddToCart} />}
 					/>
 				</Routes>
+				<ShoppingCart
+					items={cartItems}
+					onRemove={handleRemoveFromCart}
+					isOpen={isCartOpen}
+				/>
 			</div>
 		</Router>
 	);

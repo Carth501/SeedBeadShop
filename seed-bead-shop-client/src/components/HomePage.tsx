@@ -4,6 +4,7 @@ import ImageModal from '../ImageModal';
 import ProductCard from '../ProductCard';
 import { fetchProducts } from '../services/apiService';
 import { Product } from '../types';
+import AboutMe from './AboutMe';
 import CategoriesBar from './CategoriesBar';
 import ImagePanelCycle from './ShowcasePanelCycle';
 
@@ -49,6 +50,7 @@ const HomePage: React.FC = () => {
 					<ProductCard key={index} product={product} onImageClick={handleImageClick} />
 				))}
 			</div>
+			<AboutMe />
 			<ImageModal images={currentImages} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>
 	);

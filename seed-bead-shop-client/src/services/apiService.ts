@@ -12,6 +12,18 @@ export const fetchProducts = async () => {
 	}
 };
 
+export const fetchProduct = async (id: number) => {
+	try {
+		const response = await axios.get(`${API_BASE_URL}/product`, {
+			params: { id },
+		});
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching product ${id}:`, error);
+		throw error;
+	}
+};
+
 export const fetchImage = async (filename: string) => {
 	console.log('Fetching image:', filename);
 	try {

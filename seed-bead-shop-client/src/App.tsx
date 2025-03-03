@@ -44,7 +44,7 @@ function App() {
 					<Route path="/" element={<HomePage />} />
 					<Route
 						path="/product/:id"
-						element={<ProductPage products={[]} onAddToCart={handleAddToCart} />}
+						element={<ProductPage onAddToCart={handleAddToCart} />}
 					/>
 					<Route path="/search/" element={<SearchPage />} />
 				</Routes>

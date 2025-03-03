@@ -30,6 +30,30 @@ def get_products():
         products_list.append(product_dict)
     return jsonify(products_list)
 
+@app.route('/api/product', methods=['GET'])
+def get_product():
+    product_id = request.args.get('id')
+    if not product_id:
+        return jsonify({'error': 'Product ID is required'}), 400
+
+    session = SessionLocal()
+    product = session.query(Product).filter(Product.id == product_id).first()
+    session.close()
+
+    if not product:
+        return jsonify({'error': 'Product not found'}), 404
+
+    product_dict = {
+        'id': product.id,
+        'images': product.images.split(','),
+        'price': product.price,
+        'label': product.label,
+        'description': product.description,
+        'inStock': product.inStock,
+    }
+
+    return jsonify(product_dict)
+
 @app.route('/api/showcase', methods=['GET'])
 def get_showcase():
 	session = SessionLocal()

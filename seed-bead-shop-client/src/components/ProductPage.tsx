@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchImage } from '../services/apiService';
+import { fetchImage, fetchProduct } from '../services/apiService';
 import { Product } from '../types';
 
 interface ProductPageProps {
-	products: Product[];
 	onAddToCart: (product: Product) => void;
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ products, onAddToCart }) => {
+const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 	const { id } = useParams<{ id: string }>();
-	const product = id ? products.find((p) => p.id === parseInt(id)) : undefined;
+	const [product, setProduct] = useState<Product | undefined>(undefined);
 	const [imageUrls, setImageUrls] = useState<string[]>([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+
+	useEffect(() => {
+		const loadProduct = async () => {
+			if (id) {
+				try {
+					const fetchedProduct = await fetchProduct(parseInt(id));
+					setProduct(fetchedProduct);
+				} catch (error) {
+					console.error('Error fetching product:', error);
+				}
+			}
+		};
+
+		loadProduct();
+	}, [id]);
 
 	useEffect(() => {
 		const loadImages = async () => {

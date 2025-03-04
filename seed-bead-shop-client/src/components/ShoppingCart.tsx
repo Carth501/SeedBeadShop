@@ -8,8 +8,6 @@ interface ShoppingCartProps {
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) => {
-	console.log('Cart items:', items);
-
 	const totalPrice = items
 		.reduce((total, item) => {
 			return total + item.product.price * item.quantity;

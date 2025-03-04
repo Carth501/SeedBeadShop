@@ -25,7 +25,6 @@ export const fetchProduct = async (id: number) => {
 };
 
 export const fetchImage = async (filename: string) => {
-	console.log('Fetching image:', filename);
 	try {
 		const response = await axios.get(`${API_BASE_URL}/assets/${filename}`, {
 			responseType: 'blob',

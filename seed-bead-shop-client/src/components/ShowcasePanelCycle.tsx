@@ -14,7 +14,6 @@ const ImagePanelCycle: React.FC = () => {
 	const [opacities, setOpacities] = useState<number[]>([]);
 
 	useEffect(() => {
-		console.log('Fetching showcase data...');
 		const fetchData = async () => {
 			const panelData: PanelData[] = await fetchShowcase();
 			const panelDataWithImages = await Promise.all(
@@ -35,7 +34,6 @@ const ImagePanelCycle: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log('Starting panel cycle...');
 		const interval = setInterval(() => {
 			setOpacities((prevOpacities) => {
 				const newOpacities = [...prevOpacities];

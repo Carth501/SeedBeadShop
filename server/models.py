@@ -5,13 +5,15 @@ from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
 class Product(Base):
-    __tablename__ = 'products'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    images = Column(String, nullable=False)
-    price = Column(Float, nullable=False)
-    label = Column(String, nullable=False)
-    description = Column(String, nullable=False)
-    inStock = Column(Boolean, nullable=False)
+	__tablename__ = 'products'
+	id = Column(Integer, primary_key=True, autoincrement=True)
+	images = Column(String, nullable=False)
+	price = Column(Float, nullable=False)
+	label = Column(String, nullable=False)
+	description = Column(String, nullable=False)
+	inStock = Column(Boolean, nullable=False)
+	category = Column(String, nullable=False)
+	color = Column(String, nullable=False)
 
 class Panel(Base):
     __tablename__ = 'panels'

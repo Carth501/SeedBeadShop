@@ -5,6 +5,8 @@ export interface Product {
 	label: string;
 	description: string;
 	inStock: boolean;
+	category: string;
+	color: string;
 }
 
 export interface CartItem {

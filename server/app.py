@@ -26,6 +26,8 @@ def get_products():
             'label': product.label,
             'description': product.description,
             'inStock': product.inStock,
+            'category': product.category,
+            'color': product.color,
         }
         products_list.append(product_dict)
     return jsonify(products_list)

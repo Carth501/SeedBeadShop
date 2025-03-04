@@ -54,13 +54,13 @@ const SearchPage: React.FC = () => {
 
 		if (color) {
 			filtered = filtered.filter((product) =>
-				product.label.toLowerCase().includes(color.toLowerCase()),
+				product.color.toLowerCase().includes(color.toLowerCase()),
 			);
 		}
 
 		if (category) {
 			filtered = filtered.filter((product) =>
-				product.label.toLowerCase().includes(category.toLowerCase()),
+				product.category.toLowerCase().includes(category.toLowerCase()),
 			);
 		}
 

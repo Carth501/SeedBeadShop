@@ -5,12 +5,12 @@ import os
 
 from models import Panel, Product, SessionLocal
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../seed-bead-shop-client/dist', static_url_path='/')
 CORS(app)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
@@ -56,22 +56,26 @@ def get_product():
 
 @app.route('/api/showcase', methods=['GET'])
 def get_showcase():
-	session = SessionLocal()
-	showcase = session.query(Panel).all()
-	session.close()
-	showcase_list = [
-		{
-			'image': product.image,
-			'label': product.label,
-			'description': product.description,
-		}
-		for product in showcase
-	]
-	return jsonify(showcase_list)
+    session = SessionLocal()
+    showcase = session.query(Panel).all()
+    session.close()
+    showcase_list = [
+        {
+            'image': product.image,
+            'label': product.label,
+            'description': product.description,
+        }
+        for product in showcase
+    ]
+    return jsonify(showcase_list)
 
 @app.route('/api/assets/<path:filename>', methods=['GET'])
 def get_image(filename):
     return send_from_directory(os.path.join(app.root_path, 'assets'), filename)
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

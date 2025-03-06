@@ -7,6 +7,7 @@ interface PanelData {
 	description: string;
 	label: string;
 	imageUrl?: string;
+	id?: string;
 }
 
 const ImagePanelCycle: React.FC = () => {
@@ -60,6 +61,7 @@ const ImagePanelCycle: React.FC = () => {
 					imageUrl={panel.imageUrl || ''}
 					opacity={opacities[index]}
 					text={panel.label}
+					id={panel.id}
 				/>
 			))}
 		</div>

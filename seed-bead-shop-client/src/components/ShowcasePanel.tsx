@@ -1,12 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ShowcasePanelProps {
 	imageUrl: string;
 	opacity: number;
 	text?: string;
+	id?: string;
 }
 
-const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text }) => {
+const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text, id }) => {
+	const navigate = useNavigate();
+
+	function handleClick() {
+		navigate(`/product/${id}`);
+	}
+
 	return (
 		<div
 			className="absolute inset-0 flex justify-center items-center transition-opacity duration-1000 overflow-hidden"
@@ -20,8 +28,9 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text }
 					</div>
 				</div>
 			)}
-			<button
-				className="absolute bottom-10 
+			{id && (
+				<button
+					className="absolute bottom-10 
                 product-button border border-transparent 
                 px-4 py-2 text-base font-bold cursor-pointer
                 bg-gradient-to-tr from-rose-400 to-rose-300
@@ -33,10 +42,12 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text }
                 active:shadow-rose-400 active:shadow-xl
                 active:from-rose-200 active:to-rose-600
                 hover:border-none"
-				style={{ bottom: '40px' }}
-			>
-				Shop
-			</button>
+					style={{ bottom: '40px' }}
+					onClick={handleClick}
+				>
+					Shop
+				</button>
+			)}
 		</div>
 	);
 };

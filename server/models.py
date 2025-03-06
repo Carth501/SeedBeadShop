@@ -21,6 +21,7 @@ class Panel(Base):
     image = Column(String, nullable=False)
     label = Column(String, nullable=False)
     description = Column(String, nullable=False)
+    productID = Column(String, nullable=True)
 
 DATABASE_URL = "sqlite:///products.db"
 

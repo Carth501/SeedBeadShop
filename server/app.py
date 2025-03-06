@@ -66,6 +66,7 @@ def get_showcase():
             'image': product.image,
             'label': product.label,
             'description': product.description,
+        	'id': product.productID,
         }
         for product in showcase
     ]

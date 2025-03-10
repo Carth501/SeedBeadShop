@@ -1,3 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+	--color-uranian-blue: #A0D4EE;
+	--color-sky-blue: #6CCCE4;
+	--color-moonstone: #38C3D9;
+	--color-carribean-current: #217786;
+	--color-gunmetal: #092B33;
+}
+
 .product-row::-webkit-scrollbar {
   height: 8px;
 }

@@ -1,14 +1,11 @@
 @import 'tailwindcss';
 
-:root, .background {
+:root {
 	font-family: var(--font-sans);
 	--tw-leading: var(--leading-relaxed);
 	line-height: var(--leading-relaxed);
 	--tw-font-weight: var(--font-weight-normal);
 	font-weight: var(--font-weight-normal);
-	color: var(--color-white);
-	background-color: var(--color-teal-50);
-  color: rgba(0, 0, 0, 0.87);
 }
 
 h1 {

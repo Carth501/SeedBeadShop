@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './components/HomePage';
@@ -11,6 +11,10 @@ import { CartItem, Product } from './types';
 function App() {
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 	const [isCartOpen, setCartOpen] = useState(false);
+
+	useEffect(() => {
+		setTheme();
+	}, []);
 
 	const handleAddToCart = (product: Product) => {
 		setCartItems((prevItems) => {
@@ -36,10 +40,27 @@ function App() {
 		setCartOpen((prevOpen) => !prevOpen);
 	};
 
+	const setTheme = () => {
+		document.documentElement.classList.toggle(
+			'dark',
+			localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches),
+		);
+	};
+
+	const handleDarkModeToggle = () => {
+		localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark';
+		setTheme();
+	};
+
 	return (
 		<Router>
-			<div className="w-[100vw] h-[100vh] flex flex-col items-center pt-23 px-4">
-				<Header shoppingCartClick={handleToggleCart} />
+			<div
+				className=" flex flex-col items-center pt-23 px-4 
+			bg-teal-50 text-gunmetal dark:bg-gunmetal dark:text-uranian-blue"
+			>
+				<Header shoppingCartClick={handleToggleCart} darkModeClick={handleDarkModeToggle} />
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route

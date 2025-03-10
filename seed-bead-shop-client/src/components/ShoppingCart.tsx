@@ -16,7 +16,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 
 	return (
 		<div
-			className={`fixed top-0 right-0 h-full bg-cyan-100 shadow-lg transition-transform duration-300 ${
+			className={`fixed top-0 right-0 h-full bg-cyan-100 dark:bg-carribean-current shadow-lg transition-transform duration-300 ${
 				isOpen ? 'translate-x-0' : 'translate-x-full'
 			}`}
 			style={{ width: '300px' }}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutMe: React.FC = () => {
 	return (
-		<div className="about-me p-16 mt-8 border-t border-gray-300 bg-carribean-current text-white font-semibold flex items-center justify-center">
+		<div className="about-me p-16 mt-8 border-t border-gray-300 dark:border-uranian-blue bg-carribean-current text-white font-semibold flex items-center justify-center">
 			<div className="w-2/3">
 				<h2 className="text-lg">About Me</h2>
 				<p className="">

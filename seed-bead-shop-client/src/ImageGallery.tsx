@@ -60,8 +60,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 				{images.map((_, index) => (
 					<span
 						key={index}
-						className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block 
-							transition ease-in-out duration-${fade_duration} ${index === currentIndex ? 'bg-pink-300' : ''}`}
+						className={`h-3 w-3 mx-2 rounded-full inline-block 
+							transition ease-in-out duration-${fade_duration} ${
+							index === currentIndex ? 'bg-sky-blue' : 'bg-carribean-current'
+						}`}
 					></span>
 				))}
 			</div>

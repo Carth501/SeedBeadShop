@@ -40,9 +40,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 
 	return (
 		<div
-			className={`border border-gray-300 rounded-lg p-4 w-[200px] h-100 transition-all duration-300
+			className={`border  rounded-lg p-4 w-[200px] h-100 transition-all duration-300
             shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
-            justify-between
+            justify-between border-gray-300 dark:border-sky-blue
             ${!isModalOpen ? 'hover' : ''}`}
 		>
 			<div>

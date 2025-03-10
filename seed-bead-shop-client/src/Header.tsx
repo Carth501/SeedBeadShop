@@ -1,11 +1,13 @@
+import { Switch } from '@/components/ui/switch';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
 	shoppingCartClick: () => void;
+	darkModeClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
+const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => {
 	const handleCartClick = () => {
 		shoppingCartClick();
 	};
@@ -23,7 +25,8 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 	return (
 		<header
 			className="align-middle border-b-solid border-b-2 
-		border-b-gray-300 w-[100vw] top-0 left-0 z-50 fixed"
+		border-b-carribean-current dark:border-sky-blue w-[100vw] 
+		top-0 left-0 z-50 fixed bg-teal-50 dark:bg-carribean-current"
 		>
 			<div className="background flex justify-between p-4">
 				<div
@@ -77,6 +80,10 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 						info@example.com
 						<br />
 						+1 234 555 8902
+					</div>
+					<div className="flex flex-col">
+						<Switch onClick={darkModeClick} />
+						Dark Mode
 					</div>
 				</div>
 			</div>

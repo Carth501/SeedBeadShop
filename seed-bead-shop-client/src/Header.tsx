@@ -52,10 +52,10 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick }) => {
 				</button>
 				<div className="flex gap-6 items-center">
 					<button
-						className="w-12 h-12 flex items-center justify-center bg-gradient-to-tr from-rose-400 
-						to-rose-300 hover:from-rose-300 hover:to-rose-500 transition duration-250 m-1 
-						text-white rounded-2xl shadow-md text-shadow-lg hover:scale-110 hover:border-rose-600
-						active:from-rose-200 active:to-rose-600"
+						className="w-12 h-12 flex items-center justify-center bg-gradient-to-bl from-moonstone 
+						to-sky-blue hover:from-carribean-current hover:to-gunmetal transition duration-250 m-1 
+						text-white rounded-2xl shadow-md text-shadow-lg hover:scale-110 hover:border-gunmetal
+						active:from-uranian-blue active:to-gunmetal"
 						onClick={handleCartClick}
 					>
 						<svg

@@ -16,7 +16,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 
 	return (
 		<div
-			className={`fixed top-0 right-0 h-full bg-white shadow-lg transition-transform duration-300 ${
+			className={`fixed top-0 right-0 h-full bg-cyan-100 shadow-lg transition-transform duration-300 ${
 				isOpen ? 'translate-x-0' : 'translate-x-full'
 			}`}
 			style={{ width: '300px' }}
@@ -36,7 +36,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 									{item.product.price} x {item.quantity}
 								</div>
 								<button
-									className="text-red-500"
+									className="text-carribean-current hover:text-moonstone"
 									onClick={() => onRemove(item.product.id)}
 								>
 									Remove
@@ -52,17 +52,15 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 							<span className="font-bold">${totalPrice}</span>
 						</div>
 						<button
-							className="w-full border border-transparent 
-			px-4 py-2 text-base font-bold cursor-pointer
-			bg-gradient-to-tr from-rose-400 to-rose-300
-			hover:from-rose-300 hover:to-rose-500
-			transition duration-250 m-1 text-white
-			rounded-2xl shadow-md text-shadow-lg 
-			hover:scale-110 hover:border-rose-600
-			hover:shadow-rose-300 hover:shadow-lg
-			active:shadow-rose-400 active:shadow-xl
-			active:from-rose-200 active:to-rose-600
-			hover:border-none"
+							className="w-full border border-transparent px-4 
+						py-2 text-base font-bold cursor-pointer bg-gradient-to-tr 
+						from-carribean-current to-moonstone hover:from-moonstone 
+						hover:to-gunmetal transition duration-250 m-1 text-white 
+						rounded-2xl shadow-md text-shadow-lg hover:scale-110 
+						hover:border-gunmetal hover:shadow-moonstone 
+						hover:shadow-lg active:shadow-carribean-current 
+						active:shadow-xl active:from-sky-blue active:to-gunmetal 
+						hover:border-none"
 						>
 							Checkout
 						</button>

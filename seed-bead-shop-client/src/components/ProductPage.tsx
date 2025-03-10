@@ -59,8 +59,10 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 							key={index}
 							src={url}
 							alt={`${product.label} preview ${index + 1}`}
-							className={`w-20 h-20 object-cover cursor-pointer border border-gray-300 rounded-lg ${
-								index === currentImageIndex ? 'border-blue-500' : ''
+							className={`w-20 h-20 object-cover cursor-pointer border border-4 rounded-lg ${
+								index === currentImageIndex
+									? 'border-sky-blue dark:border-uranian-blue'
+									: 'border-carribean-current'
 							}`}
 							onClick={() => setCurrentImageIndex(index)}
 						/>

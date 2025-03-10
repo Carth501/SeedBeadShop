@@ -36,7 +36,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 									{item.product.price} x {item.quantity}
 								</div>
 								<button
-									className="text-carribean-current hover:text-moonstone"
+									className="text-carribean-current hover:text-moonstone dark:text-moonstone dark:hover:text-uranian-blue"
 									onClick={() => onRemove(item.product.id)}
 								>
 									Remove

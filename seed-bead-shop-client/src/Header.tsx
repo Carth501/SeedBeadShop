@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 	return (
 		<header
 			className="align-middle border-b-solid border-b-2 
-		border-b-carribean-current dark:border-sky-blue w-[100vw] 
+		border-b-carribean-current dark:border-b-gunmetal dark:border-sky-blue w-[100vw] 
 		top-0 left-0 z-50 fixed bg-teal-50 dark:bg-carribean-current"
 		>
 			<div className="background flex justify-between p-4">

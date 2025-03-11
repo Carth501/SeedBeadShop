@@ -1,3 +1,4 @@
+import { Input } from '@/components/ui/input';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductCard from '../ProductCard';
@@ -88,19 +89,23 @@ const SearchPage: React.FC = () => {
 				<div className="price-range">
 					<h3>Price Range</h3>
 					<div className="flex flex-row gap-2">
-						<input
+						<Input
 							type="number"
 							value={priceRange[0]}
-							onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setPriceRange([Number(e.target.value), priceRange[1]])
+							}
 							placeholder="Min Price"
 							min={0}
 							className="w-20"
 						/>
 						to
-						<input
+						<Input
 							type="number"
 							value={priceRange[1]}
-							onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setPriceRange([priceRange[0], Number(e.target.value)])
+							}
 							placeholder="Max Price"
 							min={0}
 							className="w-20"
@@ -109,10 +114,12 @@ const SearchPage: React.FC = () => {
 				</div>
 				<div className="color-filter">
 					<h3>Color</h3>
-					<input
+					<Input
 						type="text"
 						value={color}
-						onChange={(e) => setColor(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setColor(e.target.value)
+						}
 						placeholder="Color"
 					/>
 				</div>

@@ -50,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 					<img
 						src={imageSrc}
 						alt={product.label}
-						className="w-full h-auto aspect-square object-cover rounded hover:scale-105 
+						className="w-full h-auto aspect-square object-cover rounded hover:scale-105 focus-visible:scale-105 
                         transition-transform duration-300"
 						onClick={() => onImageClick(product.id)}
 					/>

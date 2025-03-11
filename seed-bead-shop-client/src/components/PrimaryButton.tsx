@@ -12,7 +12,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ onClick, children, classN
 		<Button
 			onClick={onClick}
 			className={`px-4 py-2 border border-transparent primary-button text-base font-bold 
-                    cursor-pointer bg-gradient-to-tr rounded-2xl shadow-md text-shadow-lg hover:scale-110 
+                    cursor-pointer bg-gradient-to-tr rounded-2xl shadow-md text-shadow-lg hover:scale-115 
                     hover:shadow-lg transition duration-250 m-1
 					text-white
 					from-carribean-current to-moonstone

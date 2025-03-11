@@ -1,3 +1,4 @@
+import ImageModal from '@/ImageModal';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchImage, fetchProduct } from '../services/apiService';
@@ -13,6 +14,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 	const [product, setProduct] = useState<Product | undefined>(undefined);
 	const [imageUrls, setImageUrls] = useState<string[]>([]);
 	const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+	const [isModalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
 		const loadProduct = async () => {
@@ -47,6 +49,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 		loadImages();
 	}, [product]);
 
+	const handleImageClick = () => {
+		setModalOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setModalOpen(false);
+	};
+
 	if (!product) {
 		return <div>Product not found</div>;
 	}
@@ -60,7 +70,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 							key={index}
 							src={url}
 							alt={`${product.label} preview ${index + 1}`}
-							className={`w-20 h-20 object-cover cursor-pointer border-4 rounded-lg ${
+							className={`w-20 h-20 object-cover cursor-pointer border-4 rounded-lg hover:hover:scale-105
+							transition-transform duration-300 ${
 								index === currentImageIndex
 									? 'border-sky-blue dark:border-uranian-blue'
 									: 'border-carribean-current'
@@ -73,7 +84,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 					<img
 						src={imageUrls[currentImageIndex]}
 						alt={product.label}
-						className="w-full h-auto mb-4 max-w-150 max-h-150 rounded-lg"
+						className="w-full h-auto mb-4 max-w-150 max-h-150 rounded-lg hover:hover:scale-105
+						transition-transform duration-300"
+						onClick={handleImageClick}
 					/>
 				)}
 			</div>
@@ -84,6 +97,12 @@ const ProductPage: React.FC<ProductPageProps> = ({ onAddToCart }) => {
 				<p className="mb-4">In Stock: {product.inStock ? 'Yes' : 'No'}</p>
 				<PrimaryButton onClick={() => onAddToCart(product)}>Add to Cart</PrimaryButton>
 			</div>
+			<ImageModal
+				images={product.images}
+				isOpen={isModalOpen}
+				onClose={handleCloseModal}
+				index={currentImageIndex}
+			/>
 		</div>
 	);
 };

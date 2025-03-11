@@ -5,9 +5,10 @@ interface ImageModalProps {
 	images: string[];
 	isOpen: boolean;
 	onClose: () => void;
+	index?: number;
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
+const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index }) => {
 	const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,6 +27,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 		loadImages();
 	}, [isOpen, images]);
 
+	useEffect(() => {
+		if (isOpen && index) {
+			setCurrentIndex(index);
+		}
+	}, [isOpen, index]);
+
 	const handleClose = () => {
 		onClose();
 		setImageSrcs([]);
@@ -37,12 +44,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 	return (
 		<div
 			className="fixed top-0 left-0 w-full h-full bg-black/70
-			 flex justify-center items-center z-1000"
+             flex justify-center items-center z-1000"
 			onClick={handleClose}
 		>
 			<div
 				className="bg-uranian-blue dark:bg-gunmetal rounded-lg p-5 shadow-lg max-w-full
-				max-h-full overflow-auto"
+                max-h-full overflow-auto"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{imageSrcs.length > 0 ? (
@@ -65,7 +72,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 								)
 							}
 							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current
-							border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
+                            border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +92,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 								setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length)
 							}
 							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current 
-							border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
+                            border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +111,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 				)}
 				<button
 					className="origin-center absolute top-2 right-2 bg-sky-blue dark:bg-carribean-current
-					border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
-					flex justify-center items-center"
+                    border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
+                    flex justify-center items-center"
 					onClick={onClose}
 					aria-label="Close modal"
 				>

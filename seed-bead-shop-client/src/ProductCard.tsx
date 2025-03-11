@@ -40,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 
 	return (
 		<div
-			className={`border  rounded-lg p-4 w-[200px] h-100 transition-all duration-300
+			className={`border rounded-lg p-4 w-50 min-h-100 transition-all duration-300
             shadow-md flex flex-col items-stretch shrink-0 background hover:scale-105 hover:shadow-lg
             justify-between border-gray-300 dark:border-sky-blue
             ${!isModalOpen ? 'hover' : ''}`}
@@ -55,10 +55,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 						onClick={() => onImageClick(product.id)}
 					/>
 				)}
-				<h2 className="text-left m-0">{product.label}</h2>
-				<p className="text-left m-0">{product.description}</p>
-				<p className="text-left m-0">${product.price.toFixed(2)}</p>
-				<p className="text-left m-0">{product.inStock ? 'In Stock' : 'Out of Stock'}</p>
+				<h2 className="text-left text-base font-bold m-0">{product.label}</h2>
+				<p className="text-left text-base m-0">{product.description}</p>
+				<p className="text-left text-base m-0">${product.price.toFixed(2)}</p>
+				<p className="text-left text-base m-0">
+					{product.inStock ? 'In Stock' : 'Out of Stock'}
+				</p>
 			</div>
 			<div className="flex flex-col items-stretch">
 				<ProductButton label="View" onClick={handleView} />

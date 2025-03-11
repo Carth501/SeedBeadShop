@@ -84,11 +84,11 @@ const SearchPage: React.FC = () => {
 	}, [priceRange, color, category, handleFilterChange]);
 
 	return (
-		<div className="search-page flex flex-row flex-start gap-4 p-4 h-full w-full">
+		<div className="search-page flex flex-row flex-start gap-4 p-4 h-full w-full text-base">
 			<div id="search-controls" className="flex flex-col gap-4">
 				<div className="price-range">
 					<h3>Price Range</h3>
-					<div className="flex flex-row gap-2">
+					<div className="flex flex-row items-center gap-2">
 						<Input
 							type="number"
 							value={priceRange[0]}

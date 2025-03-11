@@ -21,12 +21,13 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 
 	return (
 		<div
-			className={`fixed top-0 right-0 h-full bg-cyan-100 dark:bg-carribean-current shadow-lg transition-transform duration-300 ${
-				isOpen ? 'translate-x-0' : 'translate-x-full'
-			}`}
+			className={`fixed top-0 right-0 h-full bg-cyan-100 dark:bg-carribean-current 
+				shadow-lg transition-transform duration-300 text-base ${
+					isOpen ? 'translate-x-0' : 'translate-x-full'
+				}`}
 			style={{ width: '300px' }}
 		>
-			<div className="p-4 pt-25 flex flex-col h-full">
+			<div className="p-4 pt-30 flex flex-col h-full">
 				{items.length === 0 ? (
 					<p>Your cart is empty.</p>
 				) : (
@@ -41,7 +42,8 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 									{item.product.price} x {item.quantity}
 								</div>
 								<button
-									className="text-carribean-current hover:text-moonstone dark:text-moonstone dark:hover:text-uranian-blue"
+									className="text-carribean-current hover:text-moonstone 
+									dark:text-moonstone dark:hover:text-uranian-blue"
 									onClick={() => onRemove(item.product.id)}
 								>
 									Remove

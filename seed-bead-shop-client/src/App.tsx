@@ -57,8 +57,8 @@ function App() {
 	return (
 		<Router>
 			<div
-				className=" flex flex-col items-center justify-start pt-23 px-4 min-h-screen w-screen
-			bg-teal-50 text-gunmetal dark:bg-gunmetal dark:text-uranian-blue"
+				className=" flex flex-col items-center justify-start px-4 min-h-screen w-screen
+			bg-teal-50 text-gunmetal dark:bg-gunmetal dark:text-uranian-blue font-medium"
 			>
 				<Header shoppingCartClick={handleToggleCart} darkModeClick={handleDarkModeToggle} />
 				<Routes>

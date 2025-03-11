@@ -25,9 +25,9 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 
 	return (
 		<header
-			className="align-middle border-b-solid border-b-2 
+			className="align-middle sticky border-b-solid border-b-2 
 		border-b-carribean-current dark:border-b-gunmetal dark:border-sky-blue w-[100vw] 
-		top-0 left-0 z-50 fixed bg-teal-50 dark:bg-carribean-current"
+		top-0 left-0 z-50 bg-teal-50 dark:bg-carribean-current"
 		>
 			<div className="background flex justify-between p-4 items-center">
 				<div
@@ -76,7 +76,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 						<br />
 						+1 234 555 8902
 					</div>
-					<div className="flex flex-col">
+					<div className="flex flex-col items-center">
 						<Switch onClick={darkModeClick} />
 						Dark Mode
 					</div>

@@ -59,7 +59,7 @@ const SearchPage: React.FC = () => {
 			);
 		}
 
-		if (category) {
+		if (category && category != 'all') {
 			filtered = filtered.filter((product) =>
 				product.category.toLowerCase().includes(category.toLowerCase()),
 			);
@@ -74,7 +74,11 @@ const SearchPage: React.FC = () => {
 			params.set('color', color);
 		}
 		if (category) {
-			params.set('category', category);
+			if (category === 'all') {
+				params.delete('category');
+			} else {
+				params.set('category', category);
+			}
 		}
 		navigate({ search: params.toString() });
 	}, [products, priceRange, color, category, navigate]);
@@ -89,7 +93,11 @@ const SearchPage: React.FC = () => {
 				<div className="price-range">
 					<h3>Price Range</h3>
 					<div className="flex flex-row items-center gap-2">
+						<label htmlFor="min-price" className="sr-only">
+							Min Price
+						</label>
 						<Input
+							id="min-price"
 							type="number"
 							value={priceRange[0]}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -100,7 +108,11 @@ const SearchPage: React.FC = () => {
 							className="w-20"
 						/>
 						to
+						<label htmlFor="max-price" className="sr-only">
+							Max Price
+						</label>
 						<Input
+							id="max-price"
 							type="number"
 							value={priceRange[1]}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -114,7 +126,11 @@ const SearchPage: React.FC = () => {
 				</div>
 				<div className="color-filter">
 					<h3>Color</h3>
+					<label htmlFor="color" className="sr-only">
+						Color
+					</label>
 					<Input
+						id="color"
 						type="text"
 						value={color}
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -125,6 +141,9 @@ const SearchPage: React.FC = () => {
 				</div>
 				<div className="category-filter">
 					<h3>Category</h3>
+					<label htmlFor="category" className="sr-only">
+						Category
+					</label>
 					<select value={category} onChange={(e) => setCategory(e.target.value)}>
 						<option value="">All</option>
 						<option value="earring">Earring</option>
@@ -136,6 +155,8 @@ const SearchPage: React.FC = () => {
 			<div
 				id="product-grid"
 				className="flex flex-row flex-wrap gap-4 justify-start items-start"
+				role="region"
+				aria-label="Product results"
 			>
 				{filteredProducts.map((product) => (
 					<ProductCard key={product.id} product={product} onImageClick={() => {}} />

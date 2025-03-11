@@ -41,7 +41,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 			onClick={handleClose}
 		>
 			<div
-				className="bg-pink-100 rounded-lg p-5 shadow-lg max-w-full
+				className="bg-uranian-blue dark:bg-gunmetal rounded-lg p-5 shadow-lg max-w-full
 				max-h-full overflow-auto"
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -64,7 +64,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 										(prevIndex - 1 + imageSrcs.length) % imageSrcs.length,
 								)
 							}
-							className="origin-center absolute top-1/2 bg-gray-300/70 
+							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current
 							border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
 						>
 							<svg
@@ -84,7 +84,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 							onClick={() =>
 								setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length)
 							}
-							className="origin-center absolute top-1/2 bg-gray-300/70 
+							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current 
 							border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
 						>
 							<svg
@@ -103,7 +103,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 					</>
 				)}
 				<button
-					className="origin-center absolute top-2 right-2 bg-gray-300/70 
+					className="origin-center absolute top-2 right-2 bg-sky-blue dark:bg-carribean-current
 					border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
 					flex justify-center items-center"
 					onClick={onClose}
@@ -115,8 +115,10 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose }) => {
 					{imageSrcs.map((_, index) => (
 						<span
 							key={index}
-							className={`h-3 w-3 mx-2 bg-gray-400/70 rounded-full inline-block transition ease-in-out duration-300 ${
-								index === currentIndex ? 'bg-pink-300' : ''
+							className={`h-3 w-3 mx-2 rounded-full inline-block transition ease-in-out duration-300 ${
+								index === currentIndex
+									? 'bg-sky-blue'
+									: 'bg-gunmetal dark:bg-carribean-current'
 							}`}
 							onClick={() => setCurrentIndex(index)}
 						></span>

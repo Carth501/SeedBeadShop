@@ -1,6 +1,7 @@
 import { Switch } from '@/components/ui/switch';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PrimaryButton from './components/PrimaryButton';
 
 interface HeaderProps {
 	shoppingCartClick: () => void;
@@ -54,13 +55,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 					</svg>
 				</button>
 				<div className="flex gap-6 items-center">
-					<button
-						className="w-12 h-12 flex items-center justify-center bg-gradient-to-bl from-moonstone 
-						to-sky-blue hover:from-carribean-current hover:to-gunmetal transition duration-250 m-1 
-						text-white rounded-2xl shadow-md text-shadow-lg hover:scale-110 hover:border-gunmetal
-						active:from-uranian-blue active:to-gunmetal"
-						onClick={handleCartClick}
-					>
+					<PrimaryButton onClick={handleCartClick}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -75,7 +70,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 								d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
 							/>
 						</svg>
-					</button>
+					</PrimaryButton>
 					<div className="text-base">
 						info@example.com
 						<br />

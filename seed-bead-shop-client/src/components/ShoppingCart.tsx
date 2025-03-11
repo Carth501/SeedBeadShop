@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartItem } from '../types';
+import PrimaryButton from './PrimaryButton';
 
 interface ShoppingCartProps {
 	items: CartItem[];
@@ -13,6 +14,10 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 			return total + item.product.price * item.quantity;
 		}, 0)
 		.toFixed(2);
+
+	function handleCheckout() {
+		console.log('checkout');
+	}
 
 	return (
 		<div
@@ -51,19 +56,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 							<span className="font-bold">Total:</span>
 							<span className="font-bold">${totalPrice}</span>
 						</div>
-						<button
-							className="w-full border border-transparent px-4 
-						py-2 text-base font-bold cursor-pointer bg-gradient-to-tr 
-						from-carribean-current to-moonstone hover:from-moonstone 
-						hover:to-gunmetal transition duration-250 m-1 text-white 
-						rounded-2xl shadow-md text-shadow-lg hover:scale-110 
-						hover:border-gunmetal hover:shadow-moonstone 
-						hover:shadow-lg active:shadow-carribean-current 
-						active:shadow-xl active:from-sky-blue active:to-gunmetal 
-						hover:border-none"
-						>
-							Checkout
-						</button>
+						<PrimaryButton onClick={() => handleCheckout()}>Checkout</PrimaryButton>
 					</div>
 				)}
 			</div>

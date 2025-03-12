@@ -54,7 +54,11 @@ const ImagePanelCycle: React.FC = () => {
 	}
 
 	return (
-		<div className="relative w-full h-80 bg-uranian-blue dark:bg-carribean-current">
+		<div
+			className="relative w-full h-80 bg-uranian-blue dark:bg-carribean-current"
+			role="region"
+			aria-label="Showcase panel cycle"
+		>
 			{panels.map((panel, index) => (
 				<ShowcasePanel
 					key={index}

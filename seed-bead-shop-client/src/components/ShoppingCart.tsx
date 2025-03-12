@@ -26,12 +26,18 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 					isOpen ? 'translate-x-0' : 'translate-x-full'
 				}`}
 			style={{ width: '300px' }}
+			role="dialog"
+			aria-labelledby="shopping-cart-title"
+			aria-modal="true"
 		>
 			<div className="p-4 pt-30 flex flex-col h-full">
+				<h2 id="shopping-cart-title" className="sr-only">
+					Shopping Cart
+				</h2>
 				{items.length === 0 ? (
 					<p>Your cart is empty.</p>
 				) : (
-					<ul className="flex-grow overflow-y-auto">
+					<ul className="flex-grow overflow-y-auto" aria-live="polite">
 						{items.map((item) => (
 							<li
 								key={item.product.id}
@@ -45,6 +51,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 									className="text-carribean-current hover:text-moonstone 
 									dark:text-moonstone dark:hover:text-uranian-blue"
 									onClick={() => onRemove(item.product.id)}
+									aria-label={`Remove ${item.product.label} from cart`}
 								>
 									Remove
 								</button>
@@ -58,7 +65,12 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 							<span className="font-bold">Total:</span>
 							<span className="font-bold">${totalPrice}</span>
 						</div>
-						<PrimaryButton onClick={() => handleCheckout()}>Checkout</PrimaryButton>
+						<PrimaryButton
+							onClick={() => handleCheckout()}
+							aria-label="Proceed to checkout"
+						>
+							Checkout
+						</PrimaryButton>
 					</div>
 				)}
 			</div>

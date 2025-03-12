@@ -20,8 +20,10 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text, 
 		<div
 			className="absolute inset-0 flex justify-center items-center transition-opacity duration-1000 overflow-hidden"
 			style={{ opacity }}
+			role="region"
+			aria-label={text ? text : 'Showcase panel'}
 		>
-			<img src={imageUrl} alt="Panel" className="object-cover" />
+			<img src={imageUrl} alt={text ? text : 'Showcase image'} className="object-cover" />
 			{text && (
 				<div className="absolute inset-0 flex justify-center items-center">
 					<div className="bg-black/60 p-3 rounded">
@@ -30,7 +32,11 @@ const ShowcasePanel: React.FC<ShowcasePanelProps> = ({ imageUrl, opacity, text, 
 				</div>
 			)}
 			{id && (
-				<PrimaryButton className="absolute bottom-10 product-button" onClick={handleClick}>
+				<PrimaryButton
+					className="absolute bottom-10 product-button"
+					onClick={handleClick}
+					aria-label={`Shop ${text ? text : 'product'}`}
+				>
 					Shop
 				</PrimaryButton>
 			)}

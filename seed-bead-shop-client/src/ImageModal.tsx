@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { fetchImage } from './services/apiService';
 
 interface ImageModalProps {
@@ -11,6 +11,7 @@ interface ImageModalProps {
 const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index }) => {
 	const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 	const [currentIndex, setCurrentIndex] = useState(0);
+	const modalRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const loadImages = async () => {
@@ -24,6 +25,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 			}
 		};
 
+		modalRef.current?.focus();
 		loadImages();
 	}, [isOpen, images]);
 
@@ -32,6 +34,16 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 			setCurrentIndex(index);
 		}
 	}, [isOpen, index]);
+
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Escape') {
+			onClose();
+		} else if (e.key === 'ArrowLeft') {
+			setCurrentIndex((prevIndex) => (prevIndex - 1 + imageSrcs.length) % imageSrcs.length);
+		} else if (e.key === 'ArrowRight') {
+			setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length);
+		}
+	};
 
 	const handleClose = () => {
 		onClose();
@@ -44,18 +56,25 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 	return (
 		<div
 			className="fixed top-0 left-0 w-full h-full bg-black/70
-             flex justify-center items-center z-1000"
+			flex justify-center items-center z-1000"
 			onClick={handleClose}
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="modal-title"
+			aria-describedby="modal-description"
+			tabIndex={-1}
+			ref={modalRef}
+			onKeyDown={handleKeyDown}
 		>
 			<div
 				className="bg-uranian-blue dark:bg-gunmetal rounded-lg p-5 shadow-lg max-w-full
-                max-h-full overflow-auto"
+				max-h-full overflow-auto"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{imageSrcs.length > 0 ? (
 					<img
 						src={imageSrcs[currentIndex]}
-						alt="Product"
+						alt={`Product image ${currentIndex + 1}`}
 						className="w-auto h-auto max-w-[95vw] max-h-[95vh] rounded-lg"
 					/>
 				) : (
@@ -72,7 +91,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 								)
 							}
 							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current
-                            border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
+							border-none p-2 cursor-pointer rounded-full shadow-sm left-3"
+							aria-label="Previous image"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -91,8 +111,9 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 							onClick={() =>
 								setCurrentIndex((prevIndex) => (prevIndex + 1) % imageSrcs.length)
 							}
-							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current 
-                            border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
+							className="origin-center absolute top-1/2 bg-sky-blue dark:bg-carribean-current
+							border-none p-2 cursor-pointer rounded-full shadow-sm right-3"
+							aria-label="Next image"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +132,8 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 				)}
 				<button
 					className="origin-center absolute top-2 right-2 bg-sky-blue dark:bg-carribean-current
-                    border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
-                    flex justify-center items-center"
+					border-none p-2 cursor-pointer rounded-full shadow-sm w-10 h-10
+					flex justify-center items-center"
 					onClick={onClose}
 					aria-label="Close modal"
 				>
@@ -128,6 +149,13 @@ const ImageModal: React.FC<ImageModalProps> = ({ images, isOpen, onClose, index 
 									: 'bg-gunmetal dark:bg-carribean-current'
 							}`}
 							onClick={() => setCurrentIndex(index)}
+							aria-label={`View image ${index + 1}`}
+							tabIndex={0}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									setCurrentIndex(index);
+								}
+							}}
 						></span>
 					))}
 				</div>

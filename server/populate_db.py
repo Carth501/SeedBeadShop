@@ -46,13 +46,13 @@ def populate_db():
 			image='earrings_1.png',
 			label='Product 1',
 			description='Description of product 1',
-            productID='0',
+            productID='1',
 		),
         Panel(
 			image='earrings_2.png',
 			label='Product 2',
 			description='Description of product 2',
-            productID='1',
+            productID='2',
 		),
 	]
     session.add_all(showcase)

@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 			className="align-middle sticky border-b-solid border-b-2 
 		border-b-carribean-current dark:border-b-gunmetal dark:border-sky-blue w-[100vw] 
 		top-0 left-0 z-50 bg-teal-50 dark:bg-carribean-current"
+			role="banner"
 		>
 			<div className="background flex justify-between p-4 items-center">
 				<div
@@ -35,10 +36,13 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 				align-middle hover:drop-shadow-[0_0_2em_#646cffaa] flex
 				items-center justify-center cursor-pointer"
 					onClick={handleLogoClick}
+					role="button"
+					tabIndex={0}
+					aria-label="Go to homepage"
 				>
 					Logo
 				</div>
-				<PrimaryButton onClick={handleSearchClick}>
+				<PrimaryButton onClick={handleSearchClick} aria-label="Search">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
@@ -55,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ shoppingCartClick, darkModeClick }) => 
 					</svg>
 				</PrimaryButton>
 				<div className="flex gap-6 items-center">
-					<PrimaryButton onClick={handleCartClick}>
+					<PrimaryButton onClick={handleCartClick} aria-label="View shopping cart">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"

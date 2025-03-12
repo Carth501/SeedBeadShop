@@ -46,24 +46,41 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 	}, [images]);
 
 	return (
-		<div className="image-gallery left-0 w-full h-full max-w-[1024px] flex flex-col justify-center">
+		<div
+			className="image-gallery left-0 w-full h-full max-w-[1024px] flex flex-col justify-center"
+			role="region"
+			aria-label="Image gallery"
+		>
 			{imageSrcs.length > 0 && (
 				<img
 					src={imageSrcs[currentIndex]}
-					alt="Gallery"
+					alt={`Gallery image ${currentIndex + 1} of ${imageSrcs.length}`}
 					className="image-gallery-display w-full h-40 object-cover rounded
-					overflow-hidden transition-opacity duration-500 ease-in-out"
+                    overflow-hidden transition-opacity duration-500 ease-in-out"
 					style={{ opacity }}
 				/>
 			)}
-			<div className="flex justify-center mt-4">
+			<div
+				className="flex justify-center mt-4"
+				role="navigation"
+				aria-label="Image gallery navigation"
+			>
 				{images.map((_, index) => (
 					<span
 						key={index}
 						className={`h-3 w-3 mx-2 rounded-full inline-block 
-							transition ease-in-out duration-${fade_duration} ${
+                            transition ease-in-out duration-${fade_duration} ${
 							index === currentIndex ? 'bg-sky-blue' : 'bg-carribean-current'
 						}`}
+						aria-label={`Go to image ${index + 1}`}
+						role="button"
+						tabIndex={0}
+						onClick={() => setCurrentIndex(index)}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								setCurrentIndex(index);
+							}
+						}}
 					></span>
 				))}
 			</div>

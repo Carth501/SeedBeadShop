@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ImageGallery from '../ImageGallery';
 import ImageModal from '../ImageModal';
 import ProductCard from '../ProductCard';
@@ -12,6 +12,8 @@ const HomePage: React.FC = () => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [currentImages, setCurrentImages] = useState<string[]>([]);
 	const [products, setProducts] = useState<Product[]>([]);
+	const modalRef = useRef<HTMLDivElement>(null);
+	const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		const loadProducts = async () => {
@@ -29,10 +31,15 @@ const HomePage: React.FC = () => {
 	const handleImageClick = (id: number) => {
 		setCurrentImages(products[id].images);
 		setModalOpen(true);
+		triggerButtonRef.current = document.activeElement as HTMLButtonElement;
+		modalRef.current?.focus();
 	};
 
 	const handleCloseModal = () => {
 		setModalOpen(false);
+		if (triggerButtonRef.current) {
+			triggerButtonRef.current.focus();
+		}
 	};
 
 	return (
@@ -51,7 +58,13 @@ const HomePage: React.FC = () => {
 				))}
 			</div>
 			<AboutMe />
-			<ImageModal images={currentImages} isOpen={isModalOpen} onClose={handleCloseModal} />
+			<div ref={modalRef} role="dialog" aria-modal="true" tabIndex={-1}>
+				<ImageModal
+					images={currentImages}
+					isOpen={isModalOpen}
+					onClose={handleCloseModal}
+				/>
+			</div>
 		</div>
 	);
 };

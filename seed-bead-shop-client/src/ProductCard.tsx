@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageModal from './ImageModal';
 import ProductButton from './ProductButton';
@@ -7,13 +7,14 @@ import { Product } from './types';
 
 interface ProductCardProps {
 	product: Product;
-	onImageClick: (id: number) => void;
+	onImageClick: (id: number, buttonRef: HTMLButtonElement) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 	const [isModalOpen, setModalOpen] = useState(false);
 	const [imageSrc, setImageSrc] = useState<string | null>(null);
 	const navigate = useNavigate();
+	const imageButtonRef = useRef<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		const loadImage = async () => {
@@ -47,13 +48,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 		>
 			<div>
 				{imageSrc && (
-					<img
-						src={imageSrc}
-						alt={product.label}
+					<button
+						ref={imageButtonRef}
+						onClick={() => onImageClick(product.id, imageButtonRef.current!)}
+						aria-label={`View images of ${product.label}`}
 						className="w-full h-auto aspect-square object-cover rounded hover:scale-105 focus-visible:scale-105 
                         transition-transform duration-300"
-						onClick={() => onImageClick(product.id)}
-					/>
+					>
+						<img
+							src={imageSrc}
+							alt={`Image of ${product.label}`}
+							className="w-full h-auto aspect-square object-cover rounded"
+						/>
+					</button>
 				)}
 				<h2 className="text-left text-base font-bold m-0">{product.label}</h2>
 				<p className="text-left text-base m-0">{product.description}</p>
@@ -63,7 +70,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onImageClick }) => {
 				</p>
 			</div>
 			<div className="flex flex-col items-stretch">
-				<ProductButton label="View" onClick={handleView} />
+				<ProductButton
+					label="View"
+					onClick={handleView}
+					aria-label={`View details of ${product.label}`}
+				/>
 			</div>
 			<ImageModal images={product.images} isOpen={isModalOpen} onClose={handleCloseModal} />
 		</div>

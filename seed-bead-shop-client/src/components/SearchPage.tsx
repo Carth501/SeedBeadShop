@@ -1,4 +1,11 @@
 import { Input } from '@/components/ui/input';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductCard from '../ProductCard';
@@ -12,7 +19,7 @@ const SearchPage: React.FC = () => {
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [priceRange, setPriceRange] = useState<[number, number]>([0, 100]);
 	const [color, setColor] = useState<string>('');
-	const [category, setCategory] = useState<string>('');
+	const [category, setCategory] = useState<string>('all');
 
 	useEffect(() => {
 		const params = new URLSearchParams(location.search);
@@ -59,7 +66,7 @@ const SearchPage: React.FC = () => {
 			);
 		}
 
-		if (category && category != 'all') {
+		if (category && category !== 'all') {
 			filtered = filtered.filter((product) =>
 				product.category.toLowerCase().includes(category.toLowerCase()),
 			);
@@ -74,10 +81,10 @@ const SearchPage: React.FC = () => {
 			params.set('color', color);
 		}
 		if (category) {
-			if (category === 'all') {
-				params.delete('category');
-			} else {
+			if (category !== 'all') {
 				params.set('category', category);
+			} else {
+				params.delete('category');
 			}
 		}
 		navigate({ search: params.toString() });
@@ -144,12 +151,25 @@ const SearchPage: React.FC = () => {
 					<label htmlFor="category" className="sr-only">
 						Category
 					</label>
-					<select value={category} onChange={(e) => setCategory(e.target.value)}>
-						<option value="">All</option>
-						<option value="earring">Earring</option>
-						<option value="necklace">Necklace</option>
-						<option value="bracelet">Bracelet</option>
-					</select>
+					<Select value={category} onValueChange={(value) => setCategory(value)}>
+						<SelectTrigger id="category" className="w-full">
+							<SelectValue placeholder="Filter by category" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="all" className="dark:bg-carribean-current">
+								All
+							</SelectItem>
+							<SelectItem value="earring" className="dark:bg-carribean-current">
+								Earring
+							</SelectItem>
+							<SelectItem value="necklace" className="dark:bg-carribean-current">
+								Necklace
+							</SelectItem>
+							<SelectItem value="bracelet" className="dark:bg-carribean-current">
+								Bracelet
+							</SelectItem>
+						</SelectContent>
+					</Select>
 				</div>
 			</div>
 			<div

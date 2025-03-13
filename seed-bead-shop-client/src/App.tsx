@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import Checkout from './components/Checkout';
 import HomePage from './components/HomePage';
 import ProductPage from './components/ProductPage';
 import SearchPage from './components/SearchPage';
@@ -8,7 +9,7 @@ import ShoppingCart from './components/ShoppingCart';
 import Header from './Header';
 import { CartItem, Product } from './types';
 
-function App() {
+const App: React.FC = () => {
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 	const [isCartOpen, setCartOpen] = useState(false);
 
@@ -68,6 +69,7 @@ function App() {
 						element={<ProductPage onAddToCart={handleAddToCart} />}
 					/>
 					<Route path="/search/" element={<SearchPage />} />
+					<Route path="/checkout" element={<Checkout items={cartItems} />} />
 				</Routes>
 				<ShoppingCart
 					items={cartItems}
@@ -77,6 +79,6 @@ function App() {
 			</div>
 		</Router>
 	);
-}
+};
 
 export default App;

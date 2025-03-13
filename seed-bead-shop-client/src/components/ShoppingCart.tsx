@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
 import PrimaryButton from './PrimaryButton';
 
@@ -9,6 +10,8 @@ interface ShoppingCartProps {
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) => {
+	const navigate = useNavigate();
+
 	const totalPrice = items
 		.reduce((total, item) => {
 			return total + item.product.price * item.quantity;
@@ -16,7 +19,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 		.toFixed(2);
 
 	function handleCheckout() {
-		console.log('checkout');
+		navigate('/checkout');
 	}
 
 	return (

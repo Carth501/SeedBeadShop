@@ -55,6 +55,10 @@ const App: React.FC = () => {
 		setTheme();
 	};
 
+	const handleCloseCart = () => {
+		setCartOpen(false);
+	};
+
 	return (
 		<Router>
 			<div
@@ -75,6 +79,7 @@ const App: React.FC = () => {
 					items={cartItems}
 					onRemove={handleRemoveFromCart}
 					isOpen={isCartOpen}
+					onClose={handleCloseCart}
 				/>
 			</div>
 		</Router>

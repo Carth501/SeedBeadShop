@@ -7,9 +7,10 @@ interface ShoppingCartProps {
 	items: CartItem[];
 	onRemove: (id: number) => void;
 	isOpen: boolean;
+	onClose: () => void;
 }
 
-const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) => {
+const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, onClose }) => {
 	const navigate = useNavigate();
 
 	const totalPrice = items
@@ -19,6 +20,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen }) 
 		.toFixed(2);
 
 	function handleCheckout() {
+		onClose();
 		navigate('/checkout');
 	}
 

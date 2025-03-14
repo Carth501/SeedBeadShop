@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../types';
+import PrimaryButton from './PrimaryButton';
 
 interface CheckoutProps {
 	items: CartItem[];
@@ -30,7 +31,7 @@ const Checkout: React.FC<CheckoutProps> = ({ items }) => {
 				))}
 			</ul>
 			<div>Total: ${totalPrice}</div>
-			<button onClick={handlePlaceOrder}>Place Order</button>
+			<PrimaryButton onClick={handlePlaceOrder}>Place Order</PrimaryButton>
 		</div>
 	);
 };

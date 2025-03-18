@@ -1,9 +1,10 @@
-from flask import Flask, jsonify, request, send_from_directory
-from flask_cors import CORS
-from sqlalchemy.orm import Session
+import stripe
 import os
-
+from sqlalchemy.orm import Session
 from models import Panel, Product, SessionLocal
+from flask_cors import CORS
+from flask import Flask, jsonify, redirect, request, send_from_directory
+from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder='../seed-bead-shop-client/dist', static_url_path='/')
 CORS(app)
@@ -82,3 +83,32 @@ def not_found(e):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+stripe.api_key = os.getenv('STRIPE_KEY')
+
+YOUR_DOMAIN = 'http://localhost:5000'
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    'price': 'price_1R3iYtPLm1BrafkvrQOjpOQx',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '?success=true',
+            cancel_url=YOUR_DOMAIN + '?canceled=true',
+        )
+    except Exception as e:
+        return str(e)
+
+    return redirect(checkout_session.url, code=303)
+
+if __name__ == '__main__':
+    app.run(port=5000)

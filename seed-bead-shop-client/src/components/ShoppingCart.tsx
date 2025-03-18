@@ -72,9 +72,9 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({ items, onRemove, isOpen, on
 						</div>
 						<PrimaryButton
 							onClick={() => handleCheckout()}
-							aria-label="Proceed to checkout"
+							aria-label="Proceed to order preview"
 						>
-							Checkout
+							Preview Order
 						</PrimaryButton>
 					</div>
 				)}
